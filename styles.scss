@@ -1,0 +1,102 @@
+@use '@photo-sphere-viewer/core/index.scss' as psv with (
+  $buttons-height: 22px,
+  $zoom-range-width: 120px,
+  $zoom-range-tickness: 2px,
+  $zoom-range-diameter: 10px,
+  $tooltip-padding: .4rem .6rem,
+  $panel-menu-item-padding: .45rem .7rem,
+  $navbar-height: 52px
+);
+@use '@photo-sphere-viewer/markers-plugin/index.scss' as psvMarkers;
+@use '@photo-sphere-viewer/gallery-plugin/index.scss' as psvGallery;
+@use '@photo-sphere-viewer/virtual-tour-plugin/index.scss' as psvVirtual;
+
+html, body, #viewer {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+/* Override gallery plugin title font per $title-font doc */
+.psv-gallery-item-title {
+  font-size: 1rem;
+}
+
+.psv-virtual-tour-link {
+  background: rgba(0, 0, 0, 0.55) !important;
+  border-radius: 50% !important;
+  width: 66px !important;
+  height: 66px !important;
+}
+
+.psv-virtual-tour-link svg {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+.psv-virtual-tour-link.tour-arrow-next svg {
+  color: #35c759 !important; /* green for forward */
+}
+
+.psv-virtual-tour-link.tour-arrow-prev svg {
+  color: #ff3b30 !important; /* red for back */
+}
+
+@media (max-width: 768px) {
+  .psv-navbar {
+    height: 40px;
+    bottom: -40px;
+  }
+
+  .psv--has-navbar .psv-panel {
+    height: calc(100% - 40px);
+  }
+
+  .psv-button {
+    height: 20px;
+    width: 20px;
+    padding: 10px;
+  }
+
+  .psv-move-button + .psv-move-button {
+    margin-left: -10px;
+  }
+
+  .psv-custom-button {
+    min-width: 20px;
+  }
+
+  .psv-zoom-range.psv-button {
+    width: 80px;
+    height: 1px;
+    margin: 10px 0;
+    padding: 9.5px 0;
+  }
+
+  .psv-zoom-range-line {
+    width: 80px;
+    height: 1px;
+  }
+
+  .psv-zoom-range-handle {
+    width: 7px;
+    height: 7px;
+    top: -3px;
+  }
+
+  .psv-caption-content {
+    padding: 10px;
+  }
+
+  .psv-notification {
+    bottom: -40px;
+  }
+
+  .psv-notification--visible {
+    bottom: 80px;
+  }
+
+  .psv-gallery-item-title {
+    font-size: 1rem;
+  }
+}
