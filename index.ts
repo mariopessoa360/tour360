@@ -170,6 +170,7 @@ const virtualTourNodes = galleryItems.map((item, index) => {
     if (item.file === 'corredor1.jpg') {
       const corredor2Id = fileToNodeId.get('corredor2.jpg');
       const antesalaId = fileToNodeId.get('antesala.jpg');
+      const cozinha1Id = fileToNodeId.get('cozinha1.jpg');
       links.forEach((link) => {
         const isNextArrow = link.arrowStyle?.className === 'tour-arrow-next';
         link.nodeId = isNextArrow ? corredor2Id ?? link.nodeId : antesalaId ?? link.nodeId;
@@ -177,19 +178,231 @@ const virtualTourNodes = galleryItems.map((item, index) => {
           className: isNextArrow ? 'tour-arrow-next' : 'tour-arrow-prev',
         };
         link.position = {
-          yaw: isNextArrow ? Math.PI : 0,
+          yaw: isNextArrow ? Math.PI / 2 : Math.PI, // verde para cima, vermelha para a esquerda
           pitch: 0,
         };
       });
+      if (cozinha1Id && !links.some((l) => l.nodeId === cozinha1Id)) {
+        links.push({
+          nodeId: cozinha1Id,
+          position: { yaw: (3 * Math.PI) / 4, pitch: 0 }, // seta verde extra entre as existentes
+          arrowStyle: { className: 'tour-arrow-next' },
+        });
+      }
     }
-    if (item.file === 'corredor2.jpg' || item.file === 'corredor3.jpg') {
+    if (item.file === 'cozinha1.jpg') {
+      const corredor1Id = fileToNodeId.get('corredor1.jpg');
+      // normalize todas as verdes para cima
+      links
+        .filter((link) => link.arrowStyle?.className === 'tour-arrow-next')
+        .forEach((link) => {
+          link.position = { yaw: -Math.PI / 2, pitch: 0 }; // verde para cima
+        });
+
+      // garantir vermelha para a esquerda voltando ao corredor1
+      const prevLink = links.find((link) => link.arrowStyle?.className === 'tour-arrow-prev');
+      if (prevLink) {
+        prevLink.position = { yaw: Math.PI, pitch: 0 };
+        prevLink.nodeId = corredor1Id ?? prevLink.nodeId;
+      } else if (corredor1Id) {
+        links.push({
+          nodeId: corredor1Id,
+          position: { yaw: Math.PI, pitch: 0 },
+          arrowStyle: { className: 'tour-arrow-prev' },
+        });
+      }
+    }
+    if (item.file === 'cozinha2.jpg') {
+      const corredor1Id = fileToNodeId.get('corredor1.jpg');
+      const cozinha3Id = fileToNodeId.get('cozinha3.jpg');
+      const nextTarget = cozinha3Id ?? links.find((l) => l.arrowStyle?.className === 'tour-arrow-next')?.nodeId ?? 'cozinha3';
+      const prevTarget = links.find((l) => l.arrowStyle?.className === 'tour-arrow-prev')?.nodeId ?? corredor1Id ?? nextTarget;
+
+      // seta verde à direita -> cozinha3
+      const green = {
+        nodeId: nextTarget,
+        position: { yaw: 0, pitch: 0 }, // direita (ajustado)
+        arrowStyle: { className: 'tour-arrow-next' },
+      };
+      // seta vermelha para baixo, destino original (ou corredor1)
+      const red = {
+        nodeId: prevTarget,
+        position: { yaw: Math.PI / 2, pitch: 0 }, // baixo (ajustado)
+        arrowStyle: { className: 'tour-arrow-prev' },
+      };
+
+      // mantém só as duas setas com posições finais
+      links.length = 0;
+      links.push(green, red);
+    }
+    if (item.file === 'corredor2.jpg') {
+      const corredor1Id = fileToNodeId.get('corredor1.jpg');
+      const corredor3Id = fileToNodeId.get('corredor3.jpg');
+      const quarto3Id = fileToNodeId.get('quarto3.jpg');
+      links.length = 0;
+      if (corredor3Id) {
+        links.push({
+          nodeId: corredor3Id,
+          position: { yaw: 0, pitch: 0 }, // verde para cima, segue para corredor3
+          arrowStyle: { className: 'tour-arrow-next' },
+        });
+      }
+      if (corredor1Id) {
+        links.push({
+          nodeId: corredor1Id,
+          position: { yaw: -Math.PI / 2, pitch: 0 }, // vermelha para a esquerda, volta corredor1
+          arrowStyle: { className: 'tour-arrow-prev' },
+        });
+      }
+      if (quarto3Id) {
+        links.push({
+          nodeId: quarto3Id,
+          position: { yaw: Math.PI / 2, pitch: 0 }, // verde para direita, quarto3
+          arrowStyle: { className: 'tour-arrow-next' },
+        });
+      }
+    }
+    if (item.file === 'banheiroantesala.jpg') {
+      const nextLink = links.find((link) => link.arrowStyle?.className === 'tour-arrow-next');
+      const antesalaId = fileToNodeId.get('antesala.jpg');
+      const onlyPrev = nextLink
+        ? {
+            ...nextLink,
+            nodeId: antesalaId ?? nextLink.nodeId,
+            arrowStyle: { className: 'tour-arrow-prev' },
+          }
+        : null;
+      links.length = 0;
+      if (onlyPrev) {
+        links.push(onlyPrev);
+      }
+    }
+    if (item.file === 'sala1.jpg') {
       links.forEach((link) => {
         if (link.arrowStyle?.className === 'tour-arrow-next') {
-          link.arrowStyle = { className: 'tour-arrow-prev' };
-        } else if (link.arrowStyle?.className === 'tour-arrow-prev') {
-          link.arrowStyle = { className: 'tour-arrow-next' };
+          link.position = { yaw: -Math.PI / 2, pitch: 0 };
         }
       });
+    }
+    if (item.file === 'sala4.jpg') {
+      links.forEach((link) => {
+        if (link.arrowStyle?.className === 'tour-arrow-next') {
+          link.position = { yaw: Math.PI / 2, pitch: 0 }; // verde para a direita
+        } else if (link.arrowStyle?.className === 'tour-arrow-prev') {
+          link.position = { yaw: 0, pitch: 0 }; // vermelha para baixo (mantida)
+        }
+      });
+    }
+    if (item.file === 'salavista2.jpg') {
+      links.forEach((link) => {
+        if (link.arrowStyle?.className === 'tour-arrow-prev') {
+          link.position = { yaw: Math.PI / 2, pitch: 0 };
+        }
+      });
+    }
+    if (item.file === 'quarto2vista.jpg') {
+      // Remover seta verde e manter apenas a vermelha na posição da verde
+      const nextLink = links.find((link) => link.arrowStyle?.className === 'tour-arrow-next');
+      const prevLink = links.find((link) => link.arrowStyle?.className === 'tour-arrow-prev');
+      const targetPrev = prevLink ?? nextLink;
+      links.splice(0, links.length);
+      if (targetPrev) {
+        targetPrev.arrowStyle = { className: 'tour-arrow-prev' };
+        // use a posição atual da verde, caso exista; senão, padrão para frente
+        targetPrev.position = nextLink?.position ?? targetPrev.position ?? { yaw: 0, pitch: 0 };
+        links.push(targetPrev);
+      }
+    }
+    if (item.file === 'quarto3.jpg') {
+      const corredor2Id = fileToNodeId.get('corredor2.jpg');
+      const bathroomSuite3Id = fileToNodeId.get('banheiroquarto3.jpg');
+      const quarto3VistaId = fileToNodeId.get('quarto3vista.jpg');
+      const quarto1Id = fileToNodeId.get('quarto1.jpg');
+      links.length = 0;
+      if (corredor2Id) {
+        links.push({
+          nodeId: corredor2Id,
+          position: { yaw: -Math.PI / 2, pitch: 0 }, // vermelha para a esquerda, volta corredor2 (trocada com quarto1)
+          arrowStyle: { className: 'tour-arrow-prev' },
+        });
+      }
+      if (quarto1Id) {
+        links.push({
+          nodeId: quarto1Id,
+          position: { yaw: Math.PI, pitch: 0 }, // verde assume posição antiga da vermelha
+          arrowStyle: { className: 'tour-arrow-next' },
+        });
+      }
+      if (bathroomSuite3Id) {
+        links.push({
+          nodeId: bathroomSuite3Id,
+          position: { yaw: Math.PI, pitch: 0 }, // verde para baixo, banheiro suíte 3
+          arrowStyle: { className: 'tour-arrow-next' },
+        });
+      }
+      if (quarto3VistaId) {
+        links.push({
+          nodeId: quarto3VistaId,
+          position: { yaw: 0, pitch: 0 }, // verde adicional para vista
+          arrowStyle: { className: 'tour-arrow-next' },
+        });
+      }
+    }
+    if (item.file === 'quarto1vista.jpg') {
+      // Remover seta verde e manter apenas a vermelha apontando para baixo
+      const prevLink = links.find((link) => link.arrowStyle?.className === 'tour-arrow-prev');
+      links.splice(0, links.length);
+      if (prevLink) {
+        prevLink.position = { yaw: Math.PI, pitch: 0 };
+        links.push(prevLink);
+      }
+    }
+    if (item.file === 'quarto3vista.jpg') {
+      // Remover seta verde e manter apenas a vermelha apontando para baixo no lugar da verde
+      const nextLink = links.find((link) => link.arrowStyle?.className === 'tour-arrow-next');
+      const prevLink = links.find((link) => link.arrowStyle?.className === 'tour-arrow-prev');
+      links.splice(0, links.length);
+      const target = prevLink ?? nextLink;
+      if (target) {
+        target.arrowStyle = { className: 'tour-arrow-prev' };
+        target.position = nextLink?.position ?? target.position ?? { yaw: Math.PI, pitch: 0 };
+        links.push(target);
+      }
+    }
+    if (item.file === 'banheiroquarto3.jpg') {
+      // Apenas a seta vermelha voltando para quarto3, virada para baixo
+      const quarto3Id = fileToNodeId.get('quarto3.jpg') ?? links[0]?.nodeId;
+      links.length = 0;
+      links.push({
+        nodeId: quarto3Id ?? 'quarto3',
+        position: { yaw: Math.PI, pitch: 0 }, // garantir orientação para baixo
+        arrowStyle: { className: 'tour-arrow-prev' },
+      });
+    }
+    if (item.file === 'quarto2.jpg') {
+      const corredor3Id = fileToNodeId.get('corredor3.jpg');
+      const nextLink = links.find((link) => link.arrowStyle?.className === 'tour-arrow-next');
+      const prevLink = links.find((link) => link.arrowStyle?.className === 'tour-arrow-prev');
+      if (nextLink && prevLink) {
+        const prevPos = prevLink.position ?? { yaw: 0, pitch: 0 };
+        const nextPos = nextLink.position ?? { yaw: Math.PI, pitch: 0 };
+        nextLink.position = prevPos; // verde assume a posição antiga da vermelha
+        prevLink.position = nextPos; // vermelha assume a posição antiga da verde
+        if (corredor3Id) {
+          prevLink.nodeId = corredor3Id; // vermelha volta para corredor3
+        }
+      }
+    }
+    if (item.file === 'quarto1.jpg') {
+      const nextLink = links.find((link) => link.arrowStyle?.className === 'tour-arrow-next');
+      const prevLink = links.find((link) => link.arrowStyle?.className === 'tour-arrow-prev');
+      if (nextLink && prevLink) {
+        // troca apenas a posição das setas, mantendo destinos/cores
+        const prevPos = prevLink.position ?? { yaw: Math.PI, pitch: 0 };
+        const nextPos = nextLink.position ?? { yaw: 0, pitch: 0 };
+        nextLink.position = prevPos;
+        prevLink.position = nextPos;
+      }
     }
     if (item.file === 'corredor3.jpg') {
       const corredor2Id = fileToNodeId.get('corredor2.jpg');
@@ -197,28 +410,46 @@ const virtualTourNodes = galleryItems.map((item, index) => {
       const quarto1Id = fileToNodeId.get('quarto1.jpg');
       const quarto2Id = fileToNodeId.get('quarto2.jpg');
 
-      links.forEach((link) => {
-        if (corredor2Id && link.nodeId === corredor2Id) {
-          link.arrowStyle = { className: 'tour-arrow-prev' };
-          link.position = { yaw: 0, pitch: 0 };
-        } else if (bathroomId && link.nodeId !== bathroomId) {
-          link.nodeId = bathroomId;
-          link.arrowStyle = { className: 'tour-arrow-next' };
-          link.position = link.position ?? { yaw: Math.PI, pitch: 0 };
-        }
-      });
-
-      const addExtraLink = (targetId: string | undefined, yaw: number) => {
-        if (!targetId || links.some((link) => link.nodeId === targetId)) return;
+      // Reconstrói explicitamente as 4 setas do corredor3
+      links.length = 0;
+      if (corredor2Id) {
         links.push({
-          nodeId: targetId,
-          position: { yaw, pitch: 0 },
+          nodeId: corredor2Id,
+          position: { yaw: Math.PI, pitch: 0 }, // vermelha para baixo (volta ao corredor2)
+          arrowStyle: { className: 'tour-arrow-prev' },
+        });
+      }
+      if (bathroomId) {
+        links.push({
+          nodeId: bathroomId,
+          position: { yaw: 0, pitch: 0 }, // verde para cima (banheiro social)
           arrowStyle: { className: 'tour-arrow-next' },
         });
-      };
+      }
+      if (quarto1Id) {
+        links.push({
+          nodeId: quarto1Id,
+          position: { yaw: -Math.PI / 2, pitch: 0 }, // verde para esquerda (quarto1)
+          arrowStyle: { className: 'tour-arrow-next' },
+        });
+      }
+      if (quarto2Id) {
+        links.push({
+          nodeId: quarto2Id,
+          position: { yaw: Math.PI / 2, pitch: 0 }, // verde para direita (quarto2)
+          arrowStyle: { className: 'tour-arrow-next' },
+        });
+      }
+    }
 
-      addExtraLink(quarto1Id, Math.PI / 2);
-      addExtraLink(quarto2Id, -Math.PI / 2);
+    if (item.file === 'banheiromeio.jpg') {
+      const corredor3Id = fileToNodeId.get('corredor3.jpg') ?? links[0]?.nodeId;
+      links.length = 0;
+      links.push({
+        nodeId: corredor3Id ?? 'corredor3',
+        position: { yaw: Math.PI, pitch: 0 }, // vermelha para baixo voltando ao corredor3
+        arrowStyle: { className: 'tour-arrow-prev' },
+      });
     }
   }
   return {
@@ -427,4 +658,3 @@ viewer.addEventListener('ready', () => {
   }
   ensureMobileZoom();
 });
-
