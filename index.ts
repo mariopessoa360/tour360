@@ -498,7 +498,7 @@ const viewer = new Viewer({
         effect: 'fade',
         rotation: false,
         rotateTo: null,
-        zoomTo: null,
+        zoomTo: 0,
       }),
     }),
   ],
