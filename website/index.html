@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour 360 - Imóvel Premium</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <h1 class="logo">🏠 Tour 360</h1>
+                <ul class="nav-links">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#tour">Tour Virtual</a></li>
+                    <li><a href="#info">Informações</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Seção Hero -->
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Conheça nosso imóvel em 360°</h2>
+                <p>Explore todos os cômodos de forma interativa</p>
+                <a href="#tour" class="btn btn-primary">Iniciar Tour</a>
+            </div>
+        </section>
+
+        <!-- Seção do Tour 360 -->
+        <section id="tour" class="tour-section">
+            <div class="container">
+                <h2>Tour Virtual Interativo</h2>
+                <p class="subtitle">Use o mouse ou toque para explorar</p>
+                
+                <div class="tour-container">
+                    <iframe 
+                        id="tour-iframe"
+                        src="about:blank"
+                        width="100%" 
+                        height="700px"
+                        frameborder="0"
+                        allowfullscreen
+                        allow="accelerometer; gyroscope">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Informações -->
+        <section id="info" class="info-section">
+            <div class="container">
+                <h2>Características do Imóvel</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>📍 Localização</h3>
+                        <p>Localizado em região premium com fácil acesso</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🛏️ Quartos</h3>
+                        <p>3 quartos espaçosos com vista panorâmica</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🛁 Banheiros</h3>
+                        <p>3 banheiros completos e modernos</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>👨‍🍳 Cozinha</h3>
+                        <p>Cozinha integrada com bancada em mármore</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>360°</h3>
+                        <p>Explore todos os ambientes em visão panorâmica</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⚡ Virtual</h3>
+                        <p>Tour totalmente interativo e responsivo</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Contato -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Interesse em Agendar uma Visita?</h2>
+                <form class="contact-form">
+                    <input type="text" placeholder="Seu nome" required>
+                    <input type="email" placeholder="Seu email" required>
+                    <textarea placeholder="Sua mensagem" rows="5" required></textarea>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Tour 360. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
