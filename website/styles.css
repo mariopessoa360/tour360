@@ -23,7 +23,6 @@ body {
     line-height: 1.6;
     color: var(--dark-text);
     background-color: #f9f9f9;
-    min-width: 1200px; /* force desktop width on mobile */
 }
 
 .container {
@@ -164,6 +163,8 @@ header {
 .tour-section {
     padding: 4rem 2rem;
     background-color: white;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .tour-section h2 {
@@ -327,13 +328,22 @@ footer {
         font-size: 2rem;
     }
 
+    /* Reduce padding on mobile to prevent overflow */
+    .tour-section,
+    .info-section,
+    .contact-section {
+        padding: 2rem 1rem;
+    }
+
     .tour-container {
         /* height auto keeps container flexible */
         height: auto;
+        max-width: 100%;
     }
 
     .tour-container iframe {
-        height: 60vh;
+        height: 50vh; /* reduced but visible height */
+        max-width: 100%;
     }
 
     .features-grid {
