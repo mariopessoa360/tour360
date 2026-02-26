@@ -189,13 +189,13 @@ header {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
-    min-height: 80vh;
+    /* height will be determined by iframe */
 }
 
 .tour-container iframe {
     display: block;
     width: 100%;
-    height: 100%;
+    height: 80vh; /* make iframe taller, fills most of viewport */
 }
 
 /* Seção Info */
@@ -327,11 +327,12 @@ footer {
     }
 
     .tour-container {
+        /* height auto keeps container flexible */
         height: auto;
     }
 
     .tour-container iframe {
-        height: 400px;
+        height: 60vh;
     }
 
     .features-grid {
