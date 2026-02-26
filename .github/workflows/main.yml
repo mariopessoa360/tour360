@@ -27,5 +27,7 @@ jobs:
       - run: git config --global user.email "actions@github.com"
 
       - run: vite build
+      # copiar arquivos do site principal para a pasta de saída
+      - run: cp -r website/* dist/ || echo "no website folder to copy"
 
       - run: npx gh-pages -d dist --repo https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
