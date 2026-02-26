@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // URL do tour 360
     const tourUrl = isDevelopment 
         ? 'http://localhost:5173/' 
-        : 'https://psicologialaviahumanista.com.br/tour360/';
+        : 'https://corsatube360.com.br/tour360/';
     
     // Atualizar src do iframe
     const iframe = document.getElementById('tour-iframe');
