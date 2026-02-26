@@ -42,22 +42,11 @@ header {
     box-shadow: var(--shadow);
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
+/* Navbar layout */
 .navbar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-}
-
-.logo {
-    font-size: 1.8rem;
-    font-weight: bold;
 }
 
 .nav-links {
@@ -69,7 +58,6 @@ header {
 .nav-links a {
     color: white;
     text-decoration: none;
-    transition: color 0.3s;
     font-weight: 500;
 }
 
@@ -210,12 +198,6 @@ header {
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 3rem;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
 }
 
 .feature-card {
