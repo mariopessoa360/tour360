@@ -111,7 +111,7 @@ nano script.js
 # Mude para seu domínio real:
 # const tourUrl = isDevelopment 
 #     ? 'http://localhost:5173/' 
-#     : 'https://seu-dominio-hostgator.com/tour360/';
+#     : 'https://corsatube360.com.br/tour360/';
 
 # Salve: Ctrl+O, Enter, Ctrl+X
 ```
