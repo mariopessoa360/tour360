@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar">
             <div class="container">
-                <h1 class="logo">🏠 Tour 360</h1>
+                <h1 class="logo">🏠 Tour 360 <span class="logo-credit">By CorsaTube360</span></h1>
                 <!-- botão para alternar o menu em mobile -->
                 <button class="nav-toggle" aria-label="Abrir menu">
                     <span class="hamburger"></span>
@@ -45,7 +45,7 @@
                 <h2>Imóveis Disponíveis</h2>
                 <p class="section-subtitle">Escolha um imóvel para abrir o tour ou ver a galeria 360 dos ambientes.</p>
                 <div class="properties-grid">
-                    <article class="property-card">
+                    <article class="property-card" data-detail-url="property-photos.html?property=flamengo" role="link" tabindex="0" aria-label="Abrir detalhes do Apartamento Flamengo Vista Baía">
                         <div class="property-image">
                             <div id="viewer-card-1" class="card-viewer-360"></div>
                             <button class="viewer-arrow viewer-arrow-left" type="button" data-viewer="viewer-card-1" data-direction="-1" aria-label="Foto 360 anterior">&#8249;</button>
@@ -151,7 +151,16 @@
                     images: [
                         'images/cards/sala1-4k.jpg',
                         'images/cards/salavista1-4k.jpg',
-                        'images/cards/salavista2-4k.jpg'
+                        'images/cards/salavista2-4k.jpg',
+                        'images/cards/cozinha1-4k.jpg',
+                        'images/cards/cozinha2-4k.jpg',
+                        'images/cards/quarto1-4k.jpg',
+                        'images/cards/quarto1vista-4k.jpg',
+                        'images/cards/quarto2-4k.jpg',
+                        'images/cards/quarto3-4k.jpg',
+                        'images/cards/banheiromeio-4k.jpg',
+                        'images/cards/banheiroantesala-4k.jpg',
+                        'images/cards/corredor1-4k.jpg'
                     ]
                 },
                 {
@@ -186,7 +195,7 @@
                         navbar: false,
                         mousemove: true,
                         mousewheel: true,
-                        touchmoveTwoFingers: true,
+                        touchmoveTwoFingers: false,
                         defaultZoomLvl: 30,
                         defaultLong: 0,
                         defaultLat: 0,
@@ -261,6 +270,31 @@
                         console.error('Erro ao trocar panorama em ' + viewerId, error);
                     } finally {
                         state.loading = false;
+                    }
+                });
+            });
+
+            const propertyCards = document.querySelectorAll('.property-card[data-detail-url]');
+
+            propertyCards.forEach(card => {
+                const openDetails = () => {
+                    const detailUrl = card.dataset.detailUrl;
+                    if (detailUrl) {
+                        window.location.href = detailUrl;
+                    }
+                };
+
+                card.addEventListener('click', (event) => {
+                    if (event.target.closest('.btn, .viewer-arrow')) {
+                        return;
+                    }
+                    openDetails();
+                });
+
+                card.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        openDetails();
                     }
                 });
             });
