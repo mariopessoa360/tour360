@@ -1,0 +1,98 @@
+.photos-hero {
+    padding: 3rem 2rem;
+}
+
+.property-hero-meta {
+    margin: 1.2rem auto 0;
+    max-width: 760px;
+}
+
+.property-hero-meta .property-meta {
+    margin: 0;
+}
+
+.property-hero-meta .meta-pill {
+    border: none;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 999px;
+    padding: 0.4rem 0.75rem;
+}
+
+.property-hero-meta .meta-nav-btn {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.property-hero-meta .meta-nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.property-hero-meta .meta-pill svg {
+    color: var(--primary-color);
+}
+
+.photos-section {
+    padding: 2rem 2rem 4rem;
+    background: #fff;
+}
+
+.photos-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.photo-category-section {
+    scroll-margin-top: 90px;
+}
+
+.photo-category-title {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+}
+
+.photo-category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.photo-card {
+    background: #f7f9fb;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.photo-preview {
+    position: relative;
+    height: 220px;
+    background: #000;
+    cursor: pointer;
+}
+
+.photo-preview:hover {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: -2px;
+}
+
+.photo-viewer {
+    width: 100%;
+    height: 100%;
+}
+
+.photo-open {
+    width: 100%;
+    border: none;
+    background: var(--secondary-color);
+    color: #fff;
+    font-weight: 600;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.photo-open:hover {
+    background: #2f89c6;
+}
