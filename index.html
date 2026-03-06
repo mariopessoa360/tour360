@@ -224,8 +224,14 @@
     </footer>
 
     <script>
-        // Inicializar visualizadores 360 nos cards
-        document.addEventListener('DOMContentLoaded', function() {
+        // Aguardar Photo Sphere Viewer estar disponível
+        function initViewers() {
+            if (typeof PhotoSphereViewer === 'undefined') {
+                console.warn('Photo Sphere Viewer não carregado, tentando novamente...');
+                setTimeout(initViewers, 500);
+                return;
+            }
+
             const cardViewers = [
                 { id: 'viewer-card-1', image: 'images/sala1.jpg' },
                 { id: 'viewer-card-2', image: 'images/quarto1vista.jpg' },
@@ -244,7 +250,7 @@
                             panorama: config.image,
                             navbar: false,
                             mousemove: true,
-                            mousewheel: false,
+                            mousewheel: true,
                             touchmoveTwoFingers: true,
                             defaultZoomLvl: 30,
                             defaultLong: 0,
@@ -267,8 +273,12 @@
                                 clearInterval(autoRotateIntervals[config.id]);
                             }
                             autoRotateIntervals[config.id] = setInterval(() => {
-                                const currentLong = viewer.getPosition().longitude;
-                                viewer.rotate({ longitude: currentLong + 0.05, latitude: viewer.getPosition().latitude });
+                                try {
+                                    const pos = viewer.getPosition();
+                                    viewer.rotate({ longitude: pos.longitude + 0.05, latitude: pos.latitude });
+                                } catch (e) {
+                                    // Ignorar erros durante rotação
+                                }
                             }, 50);
                         });
 
@@ -278,13 +288,22 @@
                             }
                         });
 
+                        console.log('Viewer ' + config.id + ' inicializado com sucesso');
+
                     } catch (error) {
                         console.error('Erro ao inicializar viewer ' + config.id, error);
                         container.innerHTML = '<img src="' + config.image + '" alt="Preview 360" style="width:100%;height:100%;object-fit:cover;">';
                     }
                 }
             });
-        });
+        }
+
+        // Iniciar quando o DOM estiver pronto
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initViewers);
+        } else {
+            initViewers();
+        }
     </script>
     <script src="script.js"></script>
 </body>
