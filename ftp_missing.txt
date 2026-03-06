@@ -1,0 +1,13 @@
+open ftp.corsatube360.com.br
+chatgpt@corsatube360.com.br
+teste123123123
+binary
+cd public
+lcd public
+prompt
+put sala3.jpg
+put sala4.jpg
+put salavista1.jpg
+put salavista2.jpg
+put seta.png
+bye

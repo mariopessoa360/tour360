@@ -1,0 +1,6 @@
+open ftp.corsatube360.com.br
+chatgpt@corsatube360.com.br
+teste123123123
+ascii
+get script.js script_remote_check.js
+bye

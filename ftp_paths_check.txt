@@ -1,0 +1,12 @@
+open ftp.corsatube360.com.br
+chatgpt@corsatube360.com.br
+teste123123123
+pwd
+dir
+cd public_html
+pwd
+dir
+cd www
+pwd
+dir
+bye

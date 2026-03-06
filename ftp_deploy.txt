@@ -1,0 +1,20 @@
+open ftp.corsatube360.com.br
+chatgpt@corsatube360.com.br
+teste123123123
+binary
+lcd website
+prompt
+mput *.html
+mput *.css
+mput *.js
+ascii
+put .htaccess
+binary
+mkdir public
+cd public
+lcd ..\public
+mput *.jpg
+mput *.png
+cd ..
+ls
+bye

@@ -1,0 +1,13 @@
+open 162.241.203.161
+chatgpt
+DQsbk9Y85CXuEPk
+cd public_html/tour360
+binary
+mput website\*.html
+mput website\*.css
+mput website\*.js
+mput website\.htaccess
+cd public
+lcd public
+mput *.jpg
+quit

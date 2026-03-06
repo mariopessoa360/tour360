@@ -1,0 +1,7 @@
+open ftp.corsatube360.com.br
+chatgpt@corsatube360.com.br
+teste123123123
+ascii
+lcd deploy_package
+put index.html
+bye

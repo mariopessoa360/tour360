@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour 360 - ImÃ³vel Premium</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <h1 class="logo">ðŸ  Tour 360</h1>
+                <!-- botÃ£o para alternar o menu em mobile -->
+                <button class="nav-toggle" aria-label="Abrir menu">
+                    <span class="hamburger"></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="#home">InÃ­cio</a></li>
+                    <li><a href="https://corsatube360.com.br/tour360/" target="_blank" rel="noopener noreferrer">Tour Virtual</a></li>
+                    <li><a href="#info">InformaÃ§Ãµes</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- SeÃ§Ã£o Hero -->
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>ConheÃ§a nosso imÃ³vel em 360Â°</h2>
+                <p>Explore todos os cÃ´modos de forma interativa</p>
+                <a href="https://corsatube360.com.br/tour360/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Iniciar Tour</a>
+            </div>
+        </section>
+
+        <!-- SeÃ§Ã£o do Tour 360 -->
+        <section id="tour" class="tour-section">
+            <div class="container">
+                <h2>Tour Virtual Interativo</h2>
+                <p class="subtitle">Use o mouse ou toque para explorar</p>
+                
+                <div class="tour-container">
+                    <iframe 
+                        id="tour-iframe"
+                        src="about:blank"
+                            width="100%" 
+                            height="100%"
+                        frameborder="0"
+                        allowfullscreen
+                        allow="accelerometer; gyroscope">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- SeÃ§Ã£o de InformaÃ§Ãµes -->
+        <section id="info" class="info-section">
+            <div class="container">
+                <h2>CaracterÃ­sticas do ImÃ³vel</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>ðŸ“ LocalizaÃ§Ã£o</h3>
+                        <p>Bairro do Flamengo, Rio de Janeiro â€“ vista para a baÃ­a.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>ðŸ›ï¸ Quartos</h3>
+                        <p>3 quartos (2 suÃ­tes) com mÃ³veis planejados;</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>ðŸ“ Ãrea</h3>
+                        <p>Aprox. 200&nbsp;mÂ² de Ã¡rea Ãºtil bem distribuÃ­da</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>ðŸ› Banheiros</h3>
+                        <p>2 suÃ­tes com banheiro privativo + lavabo social</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>ðŸ‘¨â€ðŸ³ Cozinha</h3>
+                        <p>Cozinha planejada com armÃ¡rios sob medida e ilha central</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>360Â°</h3>
+                        <p>Explore todos os ambientes em visÃ£o panorÃ¢mica</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>âš¡ Virtual</h3>
+                        <p>Tour totalmente interativo e responsivo</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SeÃ§Ã£o de Contato -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Interesse em Agendar uma Visita?</h2>
+                <form class="contact-form">
+                    <input type="text" placeholder="Seu nome" required>
+                    <input type="email" placeholder="Seu email" required>
+                    <textarea placeholder="Sua mensagem" rows="5" required></textarea>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Tour 360. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

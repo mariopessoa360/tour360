@@ -1,0 +1,17 @@
+open 162.241.203.161
+chatgpt
+teste123123123
+binary
+cd public_html/tour360
+lcd website
+prompt
+mput *.html
+mput *.css
+mput *.js
+ascii
+put .htaccess
+binary
+cd public
+lcd ..\public
+mput *.jpg
+quit

@@ -1,0 +1,6 @@
+open ftp.corsatube360.com.br
+teste
+teste123123123
+pwd
+dir
+bye

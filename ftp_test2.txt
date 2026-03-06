@@ -1,0 +1,5 @@
+open 162.241.203.161
+chatgpt
+teste123123123
+ls
+bye

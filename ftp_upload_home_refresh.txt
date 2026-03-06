@@ -1,0 +1,9 @@
+open ftp.corsatube360.com.br
+teste@corsatube360.com.br
+teste123123123
+binary
+lcd website
+put index.html
+put styles.css
+put script.js
+bye

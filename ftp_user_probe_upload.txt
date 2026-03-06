@@ -1,0 +1,7 @@
+open ftp.corsatube360.com.br
+ftp@corsatube360.com.br
+teste123123123
+ascii
+cd incoming
+put probe-ftp-user.html
+bye
