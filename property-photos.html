@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotos 360 do Imóvel - Tour 360</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="property-photos.css">
+    <link rel="stylesheet" href="vendor/photo-sphere-viewer/index.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <h1 class="logo">🏠 Tour 360</h1>
+                <ul class="nav-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="#gallery">Fotos 360</a></li>
+                    <li><a href="index.html#contact">Contato</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero photos-hero">
+            <div class="container">
+                <h2 id="property-title">Fotos 360 do Imóvel</h2>
+                <p id="property-subtitle">Selecione qualquer foto para abrir em tela cheia.</p>
+                <div id="property-meta-icons" class="property-hero-meta"></div>
+            </div>
+        </section>
+
+        <section id="gallery" class="photos-section">
+            <div class="container">
+                <div id="photos-grid" class="photos-sections"></div>
+            </div>
+        </section>
+    </main>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "./vendor/three/three.module.js"
+            }
+        }
+    </script>
+    <script type="module" src="property-photos.js"></script>
+</body>
+</html>

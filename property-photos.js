@@ -1,0 +1,321 @@
+import { Viewer } from './vendor/photo-sphere-viewer/index.module.js';
+
+const properties = {
+    flamengo: {
+        title: 'Apartamento Flamengo Vista Baía',
+        subtitle: 'Rio de Janeiro - RJ',
+        meta: {
+            area: '200m² Área',
+            quartos: '3 Quartos',
+            banheiros: '3 Banheiros',
+            vagas: '2 Vagas'
+        },
+        sections: [
+            {
+                id: 'overview',
+                title: 'Ambientes Principais',
+                photos: [
+                    { title: 'Sala 360 - Vista 1', file: 'images/cards/sala1-4k.jpg' },
+                    { title: 'Sala 360 - Vista 2', file: 'images/cards/salavista1-4k.jpg' },
+                    { title: 'Sala 360 - Vista 3', file: 'images/cards/salavista2-4k.jpg' },
+                    { title: 'Cozinha 360', file: 'images/cards/cozinha1-4k.jpg' }
+                ]
+            },
+            {
+                id: 'quartos',
+                title: 'Fotos dos Quartos',
+                photos: [
+                    { title: 'Quarto 1', file: 'images/cards/quarto1-4k.jpg' },
+                    { title: 'Quarto 1 - Vista', file: 'images/cards/quarto1vista-4k.jpg' },
+                    { title: 'Quarto 2', file: 'images/cards/quarto2-4k.jpg' }
+                ]
+            },
+            {
+                id: 'banheiros',
+                title: 'Fotos dos Banheiros',
+                photos: [
+                    { title: 'Banheiro Social', file: 'images/cards/banheiromeio-4k.jpg' },
+                    { title: 'Banheiro Antesala', file: 'images/cards/banheiroantesala-4k.jpg' },
+                    { title: 'Banheiro Suíte', file: 'images/cards/banheiroquarto3-4k.jpg' }
+                ]
+            },
+            {
+                id: 'vagas',
+                title: 'Fotos de Garagem / Vagas',
+                photos: [
+                    { title: 'Acesso 1', file: 'images/cards/corredor1-4k.jpg' },
+                    { title: 'Acesso 2', file: 'images/cards/corredor2-4k.jpg' }
+                ]
+            }
+        ]
+    },
+    cobertura: {
+        title: 'Cobertura Zona Sul',
+        subtitle: 'Rio de Janeiro - RJ',
+        meta: {
+            area: '280m² Área',
+            quartos: '4 Quartos',
+            banheiros: '4 Banheiros',
+            vagas: '3 Vagas'
+        },
+        sections: [
+            {
+                id: 'overview',
+                title: 'Ambientes Principais',
+                photos: [
+                    { title: 'Vista Principal', file: 'images/cards/salavista1-4k.jpg' },
+                    { title: 'Ambiente Integrado', file: 'images/cards/sala1-4k.jpg' },
+                    { title: 'Cozinha', file: 'images/cards/cozinha1-4k.jpg' }
+                ]
+            },
+            {
+                id: 'quartos',
+                title: 'Fotos dos Quartos',
+                photos: [
+                    { title: 'Quarto 1 - Vista', file: 'images/cards/quarto1vista-4k.jpg' },
+                    { title: 'Quarto 2 - Vista', file: 'images/cards/quarto2vista-4k.jpg' },
+                    { title: 'Quarto 3 - Vista', file: 'images/cards/quarto3vista-4k.jpg' }
+                ]
+            },
+            {
+                id: 'banheiros',
+                title: 'Fotos dos Banheiros',
+                photos: [
+                    { title: 'Banheiro Social', file: 'images/cards/banheiromeio-4k.jpg' },
+                    { title: 'Banheiro Antesala', file: 'images/cards/banheiroantesala-4k.jpg' },
+                    { title: 'Banheiro Suíte', file: 'images/cards/banheiroquarto3-4k.jpg' }
+                ]
+            },
+            {
+                id: 'vagas',
+                title: 'Fotos de Garagem / Vagas',
+                photos: [
+                    { title: 'Acesso 1', file: 'images/cards/corredor1-4k.jpg' },
+                    { title: 'Acesso 2', file: 'images/cards/corredor2-4k.jpg' }
+                ]
+            }
+        ]
+    },
+    familiar: {
+        title: 'Apartamento Familiar Reformado',
+        subtitle: 'Rio de Janeiro - RJ',
+        meta: {
+            area: '150m² Área',
+            quartos: '3 Quartos',
+            banheiros: '2 Banheiros',
+            vagas: '1 Vaga'
+        },
+        sections: [
+            {
+                id: 'overview',
+                title: 'Ambientes Principais',
+                photos: [
+                    { title: 'Cozinha 360 - Vista 1', file: 'images/cards/cozinha1-4k.jpg' },
+                    { title: 'Cozinha 360 - Vista 2', file: 'images/cards/cozinha2-4k.jpg' },
+                    { title: 'Cozinha 360 - Vista 3', file: 'images/cards/cozinha3-4k.jpg' }
+                ]
+            },
+            {
+                id: 'quartos',
+                title: 'Fotos dos Quartos',
+                photos: [
+                    { title: 'Quarto 1', file: 'images/cards/quarto1-4k.jpg' },
+                    { title: 'Quarto 2', file: 'images/cards/quarto2-4k.jpg' },
+                    { title: 'Quarto 3', file: 'images/cards/quarto3-4k.jpg' }
+                ]
+            },
+            {
+                id: 'banheiros',
+                title: 'Fotos dos Banheiros',
+                photos: [
+                    { title: 'Banheiro Social', file: 'images/cards/banheiromeio-4k.jpg' },
+                    { title: 'Banheiro Antesala', file: 'images/cards/banheiroantesala-4k.jpg' },
+                    { title: 'Banheiro Suíte', file: 'images/cards/banheiroquarto3-4k.jpg' }
+                ]
+            },
+            {
+                id: 'vagas',
+                title: 'Fotos de Garagem / Vagas',
+                photos: [
+                    { title: 'Acesso 1', file: 'images/cards/corredor1-4k.jpg' },
+                    { title: 'Acesso 2', file: 'images/cards/corredor2-4k.jpg' }
+                ]
+            }
+        ]
+    }
+};
+
+function getPropertyId() {
+    const url = new URL(window.location.href);
+    return url.searchParams.get('property') || 'flamengo';
+}
+
+function renderMetaIcons(property) {
+    const metaContainer = document.getElementById('property-meta-icons');
+    if (!metaContainer || !property.meta) {
+        return;
+    }
+
+    metaContainer.innerHTML = `
+        <div class="property-meta">
+            <button type="button" class="meta-pill meta-nav-btn" data-target="section-overview" aria-label="Ir para ambientes principais">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                </svg>
+                <span>${property.meta.area}</span>
+            </button>
+            <button type="button" class="meta-pill meta-nav-btn" data-target="section-quartos" aria-label="Ir para fotos dos quartos">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>${property.meta.quartos}</span>
+            </button>
+            <button type="button" class="meta-pill meta-nav-btn" data-target="section-banheiros" aria-label="Ir para fotos dos banheiros">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 2v6h6V2M9 16v6h6v-6M3 9h18M3 15h18"></path>
+                    <rect x="2" y="3" width="20" height="18" rx="2"></rect>
+                </svg>
+                <span>${property.meta.banheiros}</span>
+            </button>
+            <button type="button" class="meta-pill meta-nav-btn" data-target="section-vagas" aria-label="Ir para fotos de vagas">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="5" y="11" width="14" height="10" rx="2"></rect>
+                    <circle cx="12" cy="16" r="2"></circle>
+                    <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+                </svg>
+                <span>${property.meta.vagas}</span>
+            </button>
+        </div>
+    `;
+
+    metaContainer.querySelectorAll('.meta-nav-btn').forEach((button) => {
+        button.addEventListener('click', () => {
+            const targetId = button.dataset.target;
+            const target = document.getElementById(targetId);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+}
+
+function openFullscreen(photo, propertyTitle) {
+    const url = new URL('viewer-fullscreen.html', window.location.href);
+    url.searchParams.set('image', photo.file);
+    url.searchParams.set('title', `${propertyTitle} - ${photo.title}`);
+    window.open(url.toString(), '_blank', 'noopener,noreferrer');
+}
+
+function renderPhotoCard(photo, propertyTitle) {
+    const card = document.createElement('article');
+    card.className = 'photo-card';
+
+    const preview = document.createElement('div');
+    preview.className = 'photo-preview';
+
+    const viewerId = `preview-${Math.random().toString(36).slice(2, 10)}`;
+    const viewerContainer = document.createElement('div');
+    viewerContainer.className = 'photo-viewer';
+    viewerContainer.id = viewerId;
+
+    preview.appendChild(viewerContainer);
+    card.appendChild(preview);
+
+    let pointerStart = null;
+
+    preview.addEventListener('pointerdown', (event) => {
+        pointerStart = { x: event.clientX, y: event.clientY };
+    });
+
+    preview.addEventListener('pointerup', (event) => {
+        if (!pointerStart) {
+            openFullscreen(photo, propertyTitle);
+            return;
+        }
+
+        const dx = Math.abs(event.clientX - pointerStart.x);
+        const dy = Math.abs(event.clientY - pointerStart.y);
+        pointerStart = null;
+
+        if (dx < 8 && dy < 8) {
+            openFullscreen(photo, propertyTitle);
+        }
+    });
+
+    preview.addEventListener('pointercancel', () => {
+        pointerStart = null;
+    });
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'photo-open';
+    button.textContent = `Abrir em tela cheia · ${photo.title}`;
+    button.addEventListener('click', () => openFullscreen(photo, propertyTitle));
+    card.appendChild(button);
+
+    requestAnimationFrame(() => {
+        try {
+            new Viewer({
+                container: viewerContainer,
+                panorama: photo.file,
+                navbar: false,
+                mousemove: true,
+                mousewheel: false,
+                touchmoveTwoFingers: true,
+                defaultZoomLvl: 35,
+                minFov: 25,
+                maxFov: 100
+            });
+        } catch (error) {
+            console.error('Erro no preview 360', error);
+            viewerContainer.innerHTML = `<img src="${photo.file}" alt="${photo.title}" style="width:100%;height:100%;object-fit:cover;">`;
+        }
+    });
+
+    return card;
+}
+
+function renderPhotoSections(property, propertyTitle) {
+    const sectionsContainer = document.getElementById('photos-grid');
+    sectionsContainer.innerHTML = '';
+
+    property.sections.forEach((section) => {
+        const sectionElement = document.createElement('section');
+        sectionElement.className = 'photo-category-section';
+        sectionElement.id = `section-${section.id}`;
+
+        const heading = document.createElement('h3');
+        heading.className = 'photo-category-title';
+        heading.textContent = section.title;
+        sectionElement.appendChild(heading);
+
+        const grid = document.createElement('div');
+        grid.className = 'photo-category-grid';
+
+        section.photos.forEach((photo) => {
+            grid.appendChild(renderPhotoCard(photo, propertyTitle));
+        });
+
+        sectionElement.appendChild(grid);
+        sectionsContainer.appendChild(sectionElement);
+    });
+}
+
+function init() {
+    const propertyId = getPropertyId();
+    const property = properties[propertyId] || properties.flamengo;
+
+    const title = document.getElementById('property-title');
+    const subtitle = document.getElementById('property-subtitle');
+    title.textContent = property.title;
+    subtitle.textContent = `${property.subtitle} · Clique em qualquer foto 360 para abrir em tela cheia.`;
+    renderMetaIcons(property);
+    renderPhotoSections(property, property.title);
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
