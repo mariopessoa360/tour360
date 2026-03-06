@@ -123,6 +123,13 @@ header {
     opacity: 0.9;
 }
 
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
 /* Botões */
 .btn {
     display: inline-block;
@@ -145,6 +152,155 @@ header {
     background-color: #c0392b;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #2f89c6;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-outline:hover {
+    background-color: white;
+    color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+}
+
+.properties-section {
+    padding: 4rem 2rem;
+    background-color: white;
+}
+
+.properties-section h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.properties-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.property-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.property-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.property-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    background-color: #000;
+}
+
+.property-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.card-viewer-360 {
+    width: 100%;
+    height: 200px;
+    position: relative;
+}
+
+.card-viewer-360 canvas {
+    border-radius: 0 !important;
+}
+
+.property-card:hover .property-image img {
+    transform: scale(1.05);
+}
+
+.property-info {
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.property-card h3 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.property-location {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.property-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding: 0.5rem 0;
+}
+
+.meta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background-color: transparent;
+    color: var(--dark-text);
+    border: none;
+    padding: 0;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.meta-pill svg {
+    width: 16px;
+    height: 16px;
+    color: #7f8c8d;
+    flex-shrink: 0;
+}
+
+.property-actions {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: auto;
+}
+
+.property-actions .btn {
+    flex: 1;
+    text-align: center;
+    padding: 10px 12px;
 }
 
 /* Seção Tour */
@@ -198,6 +354,12 @@ header {
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 3rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
 }
 
 .feature-card {
@@ -298,34 +460,34 @@ footer {
     .logo {
         font-size: 1.4rem;
     }
-    }
 
     .hero h2 {
         font-size: 2rem;
     }
 
-    .tour-section h2,
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    .properties-section h2,
     .info-section h2,
     .contact-section h2 {
         font-size: 2rem;
     }
 
     /* Reduce padding on mobile to prevent overflow */
-    .tour-section,
+    .properties-section,
     .info-section,
     .contact-section {
         padding: 2rem 1rem;
     }
 
-    .tour-container {
-        /* height auto keeps container flexible */
-        height: auto;
-        max-width: 100%;
-    }
-
-    .tour-container iframe {
-        height: 50vh; /* reduced but visible height */
-        max-width: 100%;
+    .property-actions {
+        flex-direction: column;
     }
 
     .features-grid {
