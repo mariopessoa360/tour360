@@ -312,6 +312,7 @@ function init() {
     const title = document.getElementById('property-title');
     const subtitle = document.getElementById('property-subtitle');
     const tourLink = document.getElementById('property-tour-link');
+    const siteLogo = document.getElementById('site-logo');
 
     title.textContent = property.title;
     subtitle.textContent = `${property.subtitle} · Clique em qualquer foto 360 para abrir em tela cheia.`;
@@ -320,6 +321,31 @@ function init() {
         tourLink.target = '_blank';
         tourLink.rel = 'noopener noreferrer';
     }
+
+    if (siteLogo) {
+        siteLogo.style.cursor = 'pointer';
+        siteLogo.setAttribute('role', 'button');
+        siteLogo.setAttribute('tabindex', '0');
+        siteLogo.addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+        siteLogo.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                window.location.href = 'index.html';
+            }
+        });
+    }
+
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+            navToggle.classList.toggle('open');
+        });
+    }
+
     renderMetaIcons(property);
     renderPhotoSections(property, property.title);
 }
