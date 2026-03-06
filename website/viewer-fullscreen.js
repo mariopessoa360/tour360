@@ -21,7 +21,7 @@ function init() {
             navbar: ['zoom', 'move', 'fullscreen'],
             mousemove: true,
             mousewheel: true,
-            touchmoveTwoFingers: true,
+            touchmoveTwoFingers: false,
             defaultZoomLvl: 50,
             minFov: 20,
             maxFov: 100,

@@ -265,7 +265,7 @@ function renderPhotoCard(photo, propertyTitle) {
                 navbar: false,
                 mousemove: true,
                 mousewheel: false,
-                touchmoveTwoFingers: true,
+                touchmoveTwoFingers: false,
                 defaultZoomLvl: 35,
                 minFov: 25,
                 maxFov: 100
