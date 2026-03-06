@@ -4,6 +4,7 @@ const properties = {
     flamengo: {
         title: 'Apartamento Flamengo Vista Baía',
         subtitle: 'Rio de Janeiro - RJ',
+        tourUrl: 'https://corsatube360.com.br/tour360/',
         meta: {
             area: '200m² Área',
             quartos: '3 Quartos',
@@ -52,6 +53,7 @@ const properties = {
     cobertura: {
         title: 'Cobertura Zona Sul',
         subtitle: 'Rio de Janeiro - RJ',
+        tourUrl: 'https://corsatube360.com.br/tour360/',
         meta: {
             area: '280m² Área',
             quartos: '4 Quartos',
@@ -99,6 +101,7 @@ const properties = {
     familiar: {
         title: 'Apartamento Familiar Reformado',
         subtitle: 'Rio de Janeiro - RJ',
+        tourUrl: 'https://corsatube360.com.br/tour360/',
         meta: {
             area: '150m² Área',
             quartos: '3 Quartos',
@@ -308,8 +311,15 @@ function init() {
 
     const title = document.getElementById('property-title');
     const subtitle = document.getElementById('property-subtitle');
+    const tourLink = document.getElementById('property-tour-link');
+
     title.textContent = property.title;
     subtitle.textContent = `${property.subtitle} · Clique em qualquer foto 360 para abrir em tela cheia.`;
+    if (tourLink) {
+        tourLink.href = property.tourUrl || 'https://corsatube360.com.br/tour360/';
+        tourLink.target = '_blank';
+        tourLink.rel = 'noopener noreferrer';
+    }
     renderMetaIcons(property);
     renderPhotoSections(property, property.title);
 }
