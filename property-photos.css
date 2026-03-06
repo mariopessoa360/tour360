@@ -7,6 +7,11 @@
     max-width: 760px;
 }
 
+.property-tour-btn {
+    margin-top: 1rem;
+    min-width: 180px;
+}
+
 .property-hero-meta .property-meta {
     margin: 0;
 }
