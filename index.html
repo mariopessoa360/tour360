@@ -232,11 +232,14 @@
                 { id: 'viewer-card-3', image: 'images/cozinha1.jpg' }
             ];
 
+            const viewerInstances = {};
+            let autoRotateIntervals = {};
+
             cardViewers.forEach(config => {
                 const container = document.getElementById(config.id);
                 if (container) {
                     try {
-                        new PhotoSphereViewer.Viewer({
+                        const viewer = new PhotoSphereViewer.Viewer({
                             container: container,
                             panorama: config.image,
                             navbar: false,
@@ -244,13 +247,37 @@
                             mousewheel: false,
                             touchmoveTwoFingers: true,
                             defaultZoomLvl: 30,
+                            defaultLong: 0,
+                            defaultLat: 0,
                             fisheye: false,
                             loadingTxt: 'Carregando...',
+                            minFov: 20,
+                            maxFov: 120,
                             size: {
                                 width: '100%',
                                 height: '200px'
                             }
                         });
+
+                        viewerInstances[config.id] = viewer;
+
+                        // Adicionar autorotação ao hover
+                        container.addEventListener('mouseenter', function() {
+                            if (autoRotateIntervals[config.id]) {
+                                clearInterval(autoRotateIntervals[config.id]);
+                            }
+                            autoRotateIntervals[config.id] = setInterval(() => {
+                                const currentLong = viewer.getPosition().longitude;
+                                viewer.rotate({ longitude: currentLong + 0.05, latitude: viewer.getPosition().latitude });
+                            }, 50);
+                        });
+
+                        container.addEventListener('mouseleave', function() {
+                            if (autoRotateIntervals[config.id]) {
+                                clearInterval(autoRotateIntervals[config.id]);
+                            }
+                        });
+
                     } catch (error) {
                         console.error('Erro ao inicializar viewer ' + config.id, error);
                         container.innerHTML = '<img src="' + config.image + '" alt="Preview 360" style="width:100%;height:100%;object-fit:cover;">';
