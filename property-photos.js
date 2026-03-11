@@ -220,10 +220,14 @@ function renderPhotoCard(photo, propertyTitle) {
     const preview = document.createElement('div');
     preview.className = 'photo-preview';
 
-    const viewerId = `preview-${Math.random().toString(36).slice(2, 10)}`;
+    const viewerId = `preview-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
     const viewerContainer = document.createElement('div');
     viewerContainer.className = 'photo-viewer';
     viewerContainer.id = viewerId;
+    
+    // Converter para URL absoluta para melhor compatibilidade mobile
+    const absoluteUrl = photo.file.startsWith('http') ? photo.file : 'https://corsatube360.com.br/' + (photo.file.startsWith('/') ? photo.file.slice(1) : photo.file);
+    viewerContainer.style.background = `url(${absoluteUrl}) center/cover no-repeat`;
 
     preview.appendChild(viewerContainer);
     card.appendChild(preview);
@@ -264,18 +268,21 @@ function renderPhotoCard(photo, propertyTitle) {
         try {
             new Viewer({
                 container: viewerContainer,
-                panorama: photo.file,
+                panorama: photo.file.startsWith('http') ? photo.file : 'https://corsatube360.com.br/' + (photo.file.startsWith('/') ? photo.file.slice(1) : photo.file),
                 navbar: false,
                 mousemove: true,
                 mousewheel: false,
                 touchmoveTwoFingers: false,
                 defaultZoomLvl: 35,
                 minFov: 25,
-                maxFov: 100
+                maxFov: 100,
+                loadingTxt: 'Carregando...'
             });
         } catch (error) {
             console.error('Erro no preview 360', error);
-            viewerContainer.innerHTML = `<img src="${photo.file}" alt="${photo.title}" style="width:100%;height:100%;object-fit:cover;">`;
+            viewerContainer.innerHTML = '';
+            const absoluteUrl = photo.file.startsWith('http') ? photo.file : 'https://corsatube360.com.br/' + (photo.file.startsWith('/') ? photo.file.slice(1) : photo.file);
+            viewerContainer.style.background = `url(${absoluteUrl}) center/cover no-repeat`;
         }
     });
 
