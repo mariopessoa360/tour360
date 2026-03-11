@@ -108,3 +108,18 @@
 .photo-open:hover {
     background: #2f89c6;
 }
+
+.detail-contact-section {
+    padding-top: 1rem;
+}
+
+.detail-contact-subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    margin: -0.5rem auto 1.5rem;
+    max-width: 700px;
+}
+
+.detail-contact-form {
+    max-width: 680px;
+}

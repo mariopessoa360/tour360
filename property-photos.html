@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="property-photos.css">
     <link rel="stylesheet" href="vendor/photo-sphere-viewer/index.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
     <header>
@@ -19,7 +20,7 @@
                 <ul class="nav-links">
                     <li><a href="index.html">Início</a></li>
                     <li><a href="#gallery">Fotos 360</a></li>
-                    <li><a href="index.html#contact">Contato</a></li>
+                    <li><a href="#contact-detail">Contato</a></li>
                 </ul>
             </div>
         </nav>
@@ -41,6 +42,25 @@
                 <div id="photos-grid" class="photos-sections"></div>
             </div>
         </section>
+
+        <section id="contact-detail" class="contact-section detail-contact-section">
+            <div class="container">
+                <h2>Gostou deste imóvel?</h2>
+                <p class="detail-contact-subtitle">Se tiver interesse, preencha o formulário abaixo e entraremos em contato com você.</p>
+                <form class="contact-form detail-contact-form" id="detail-contact-form">
+                    <input type="text" name="name" placeholder="Seu nome" required>
+                    <input type="email" name="email" placeholder="Seu email" required>
+                    <input type="tel" name="phone" placeholder="Telefone / WhatsApp" inputmode="tel" pattern="[0-9\s\-\(\)\+]{10,}" title="Informe um telefone válido com DDD" required>
+                    <label class="visit-datetime-label" for="visit-datetime-detail">Data e horário da visita</label>
+                    <input type="text" id="visit-datetime-detail" name="visit_datetime" class="visit-datetime-input" placeholder="Selecione a data e hora" autocomplete="off" required>
+                    <textarea name="message" placeholder="Sua mensagem" rows="5" required></textarea>
+                    <input type="hidden" name="_subject" value="Interesse em imóvel - Tour 360">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="text" name="_honey" style="display:none">
+                    <button type="submit" class="btn btn-primary">Enviar interesse</button>
+                </form>
+            </div>
+        </section>
     </main>
 
     <script type="importmap">
@@ -50,6 +70,8 @@
             }
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
     <script type="module" src="property-photos.js"></script>
 </body>
 </html>

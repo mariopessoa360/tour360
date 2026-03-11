@@ -315,6 +315,148 @@ function renderPhotoSections(property, propertyTitle) {
     });
 }
 
+function setupDetailContactForm(property) {
+    const form = document.getElementById('detail-contact-form');
+    if (!form) {
+        return;
+    }
+
+    const dateTimeInput = form.querySelector('input[name="visit_datetime"]');
+
+    function toDateTimeLocalString(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+
+    function getTomorrowAtEightDateTimeLocal() {
+        const now = new Date();
+        now.setDate(now.getDate() + 1);
+        now.setHours(8, 0, 0, 0);
+        return toDateTimeLocalString(now);
+    }
+
+    function getTomorrowAtEightDateObj() {
+        const now = new Date();
+        now.setDate(now.getDate() + 1);
+        now.setHours(8, 0, 0, 0);
+        return now;
+    }
+
+    function parseDateTimeValue(value) {
+        if (!value) {
+            return null;
+        }
+
+        const normalized = value.replace(' ', 'T');
+        const parsed = new Date(normalized);
+        return Number.isNaN(parsed.getTime()) ? null : parsed;
+    }
+
+    function hasValidMinuteStep(dateValue) {
+        const selected = new Date(dateValue);
+        const minute = selected.getMinutes();
+        return minute === 0 || minute === 30;
+    }
+
+    function updateVisitMin() {
+        if (!dateTimeInput) {
+            return;
+        }
+
+        if (!dateTimeInput.value) {
+            dateTimeInput.value = getTomorrowAtEightDateTimeLocal();
+        }
+    }
+
+    function isValidVisitDateTime() {
+        if (!dateTimeInput || !dateTimeInput.value) {
+            return true;
+        }
+
+        const selected = parseDateTimeValue(dateTimeInput.value);
+        if (!selected) {
+            return false;
+        }
+        const hours = selected.getHours();
+        const inBusinessHours = hours >= 8 && (hours < 17 || (hours === 17 && selected.getMinutes() === 0));
+
+        return selected.getTime() >= Date.now() && hasValidMinuteStep(dateTimeInput.value) && inBusinessHours;
+    }
+
+    updateVisitMin();
+    if (dateTimeInput) {
+        if (window.flatpickr) {
+            if (window.flatpickr?.l10ns?.pt) {
+                window.flatpickr.localize(window.flatpickr.l10ns.pt);
+            }
+
+            window.flatpickr(dateTimeInput, {
+                enableTime: true,
+                time_24hr: true,
+                dateFormat: 'Y-m-d H:i',
+                altInput: true,
+                altFormat: 'd/m/Y H:i',
+                minuteIncrement: 30,
+                minDate: 'today',
+                minTime: '08:00',
+                maxTime: '17:00',
+                defaultDate: getTomorrowAtEightDateObj(),
+                allowInput: false,
+                clickOpens: true
+            });
+        }
+    }
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if (!isValidVisitDateTime()) {
+            alert('Escolha data e horário válidos para visita: de 08:00 até 17:00, com minutos 00 ou 30.');
+            return;
+        }
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn ? submitBtn.textContent : 'Enviar interesse';
+
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+        }
+
+        const formData = new FormData(form);
+        formData.set('ad_interest', property.title || 'Interesse em imóvel (detalhes)');
+        formData.set('property_url', window.location.href);
+
+        try {
+            const response = await fetch('https://formsubmit.co/ajax/corsatube@gmail.com', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    Accept: 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Falha no envio');
+            }
+
+            alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+            form.reset();
+        } catch (_error) {
+            alert('Não foi possível enviar agora. Tente novamente em alguns instantes.');
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+            }
+        }
+    });
+}
+
 function init() {
     const propertyId = getPropertyId();
     const property = properties[propertyId] || properties.flamengo;
@@ -367,6 +509,7 @@ function init() {
 
     renderMetaIcons(property);
     renderPhotoSections(property, property.title);
+    setupDetailContactForm(property);
 }
 
 if (document.readyState === 'loading') {
