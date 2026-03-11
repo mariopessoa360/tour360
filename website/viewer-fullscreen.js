@@ -15,7 +15,7 @@ function init() {
     const container = document.getElementById('viewer-fullscreen');
 
     try {
-        new Viewer({
+        const viewer = new Viewer({
             container,
             panorama: image,
             navbar: ['zoom', 'move', 'fullscreen'],
@@ -23,9 +23,14 @@ function init() {
             mousewheel: true,
             touchmoveTwoFingers: false,
             defaultZoomLvl: 50,
-            minFov: 20,
-            maxFov: 100,
+            minFov: 30,
+            maxFov: 120,
             loadingTxt: 'Carregando foto 360...'
+        });
+
+        // Remover zoom quando a foto carregar completamente
+        viewer.addEventListener('ready', () => {
+            viewer.zoom(0);
         });
 
         const requestFs = () => {

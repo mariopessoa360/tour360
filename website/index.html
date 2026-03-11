@@ -91,6 +91,34 @@
                             </div>
                         </div>
                     </article>
+
+                    <article class="property-card ad-card" aria-label="Espaço para anunciar imóvel">
+                        <div class="property-image ad-image">
+                            <div class="ad-placeholder">📣</div>
+                        </div>
+                        <div class="property-info">
+                            <h3>Anuncie aqui seu imóvel ou empreendimento!</h3>
+                            <p class="property-location">Dê visibilidade para seu imóvel com tour e fotos 360.</p>
+                            <p class="property-price ad-price">Espaço disponível</p>
+                            <div class="property-actions">
+                                <a href="#contact" class="btn btn-secondary">Quero anunciar</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="property-card ad-card" aria-label="Espaço para anunciar empreendimento">
+                        <div class="property-image ad-image">
+                            <div class="ad-placeholder">📣</div>
+                        </div>
+                        <div class="property-info">
+                            <h3>Anuncie aqui seu imóvel ou empreendimento!</h3>
+                            <p class="property-location">Dê visibilidade para seu imóvel com tour e fotos 360.</p>
+                            <p class="property-price ad-price">Espaço disponível</p>
+                            <div class="property-actions">
+                                <a href="#contact" class="btn btn-secondary">Quero anunciar</a>
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -120,10 +148,14 @@
         <section id="contact" class="contact-section">
             <div class="container">
                 <h2>Interesse em Agendar uma Visita?</h2>
-                <form class="contact-form">
-                    <input type="text" placeholder="Seu nome" required>
-                    <input type="email" placeholder="Seu email" required>
-                    <textarea placeholder="Sua mensagem" rows="5" required></textarea>
+                <form class="contact-form" id="contact-form">
+                    <input type="text" name="name" placeholder="Seu nome" required>
+                    <input type="email" name="email" placeholder="Seu email" required>
+                    <input type="tel" name="phone" placeholder="Telefone / WhatsApp" inputmode="tel" pattern="[0-9\s\-\(\)\+]{10,}" title="Informe um telefone válido com DDD" required>
+                    <textarea name="message" placeholder="Sua mensagem" rows="5" required></textarea>
+                    <input type="hidden" name="_subject" value="Novo contato - Tour 360">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="text" name="_honey" style="display:none">
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
             </div>
