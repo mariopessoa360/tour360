@@ -89,6 +89,16 @@
                                 <a href="https://corsatube360.com.br/tour360/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Tour 360</a>
                                 <a href="property-photos.html?property=flamengo" class="btn btn-secondary">Fotos 360</a>
                             </div>
+                            <form class="contact-form card-contact-form">
+                                <input type="text" name="name" placeholder="Seu nome" required>
+                                <input type="email" name="email" placeholder="Seu email" required>
+                                <input type="tel" name="phone" placeholder="Telefone / WhatsApp" inputmode="tel" pattern="[0-9\s\-\(\)\+]{10,}" title="Informe um telefone válido com DDD" required>
+                                <textarea name="message" placeholder="Mensagem sobre este anúncio" rows="3" required></textarea>
+                                <input type="hidden" name="_subject" value="Novo contato - Tour 360">
+                                <input type="hidden" name="_captcha" value="false">
+                                <input type="text" name="_honey" style="display:none">
+                                <button type="submit" class="btn btn-primary">Enviar contato</button>
+                            </form>
                         </div>
                     </article>
 
@@ -100,9 +110,16 @@
                             <h3>Anuncie aqui seu imóvel ou empreendimento!</h3>
                             <p class="property-location">Dê visibilidade para seu imóvel com tour e fotos 360.</p>
                             <p class="property-price ad-price">Espaço disponível</p>
-                            <div class="property-actions">
-                                <a href="#contact" class="btn btn-secondary">Quero anunciar</a>
-                            </div>
+                            <form class="contact-form card-contact-form">
+                                <input type="text" name="name" placeholder="Seu nome" required>
+                                <input type="email" name="email" placeholder="Seu email" required>
+                                <input type="tel" name="phone" placeholder="Telefone / WhatsApp" inputmode="tel" pattern="[0-9\s\-\(\)\+]{10,}" title="Informe um telefone válido com DDD" required>
+                                <textarea name="message" placeholder="Mensagem sobre este anúncio" rows="3" required></textarea>
+                                <input type="hidden" name="_subject" value="Novo contato - Tour 360">
+                                <input type="hidden" name="_captcha" value="false">
+                                <input type="text" name="_honey" style="display:none">
+                                <button type="submit" class="btn btn-primary">Enviar contato</button>
+                            </form>
                         </div>
                     </article>
 
@@ -114,9 +131,16 @@
                             <h3>Anuncie aqui seu imóvel ou empreendimento!</h3>
                             <p class="property-location">Dê visibilidade para seu imóvel com tour e fotos 360.</p>
                             <p class="property-price ad-price">Espaço disponível</p>
-                            <div class="property-actions">
-                                <a href="#contact" class="btn btn-secondary">Quero anunciar</a>
-                            </div>
+                            <form class="contact-form card-contact-form">
+                                <input type="text" name="name" placeholder="Seu nome" required>
+                                <input type="email" name="email" placeholder="Seu email" required>
+                                <input type="tel" name="phone" placeholder="Telefone / WhatsApp" inputmode="tel" pattern="[0-9\s\-\(\)\+]{10,}" title="Informe um telefone válido com DDD" required>
+                                <textarea name="message" placeholder="Mensagem sobre este anúncio" rows="3" required></textarea>
+                                <input type="hidden" name="_subject" value="Novo contato - Tour 360">
+                                <input type="hidden" name="_captcha" value="false">
+                                <input type="text" name="_honey" style="display:none">
+                                <button type="submit" class="btn btn-primary">Enviar contato</button>
+                            </form>
                         </div>
                     </article>
                 </div>
@@ -148,7 +172,7 @@
         <section id="contact" class="contact-section">
             <div class="container">
                 <h2>Interesse em Agendar uma Visita?</h2>
-                <form class="contact-form" id="contact-form">
+                <form class="contact-form">
                     <input type="text" name="name" placeholder="Seu nome" required>
                     <input type="email" name="email" placeholder="Seu email" required>
                     <input type="tel" name="phone" placeholder="Telefone / WhatsApp" inputmode="tel" pattern="[0-9\s\-\(\)\+]{10,}" title="Informe um telefone válido com DDD" required>
@@ -317,7 +341,7 @@
                 };
 
                 card.addEventListener('click', (event) => {
-                    if (event.target.closest('.btn, .viewer-arrow')) {
+                    if (event.target.closest('.btn, .viewer-arrow, .contact-form, input, textarea, label')) {
                         return;
                     }
                     openDetails();

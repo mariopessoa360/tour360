@@ -501,10 +501,34 @@ header {
     transition: border-color 0.3s;
 }
 
+.visit-datetime-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: -0.8rem;
+}
+
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
     border-color: var(--secondary-color);
+}
+
+.card-contact-form {
+    max-width: 100%;
+    margin: 0.2rem 0 0;
+    gap: 0.6rem;
+}
+
+.card-contact-form input,
+.card-contact-form textarea {
+    padding: 9px;
+    font-size: 0.9rem;
+}
+
+.card-contact-form .btn {
+    width: 100%;
+    padding: 10px 14px;
 }
 
 .cookie-banner {
