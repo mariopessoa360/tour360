@@ -1,5 +1,24 @@
 // Script para carregar o iframe com o tour 360
 document.addEventListener('DOMContentLoaded', function() {
+    async function postFormWithTimeout(url, formData, timeoutMs = 15000) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    Accept: 'application/json'
+                },
+                signal: controller.signal
+            });
+            return response;
+        } finally {
+            clearTimeout(timeoutId);
+        }
+    }
+
     function toDateTimeLocalString(date) {
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -113,13 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
             formData.set('ad_interest', adInterest);
 
             try {
-                const response = await fetch('https://formsubmit.co/ajax/corsatube@gmail.com', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        Accept: 'application/json'
-                    }
-                });
+                const response = await postFormWithTimeout('https://formsubmit.co/ajax/corsatube@gmail.com', formData);
 
                 if (!response.ok) {
                     throw new Error('Falha no envio');
