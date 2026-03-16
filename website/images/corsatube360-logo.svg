@@ -1,0 +1,23 @@
+<svg width="780" height="160" viewBox="0 0 780 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">CorsaTube360</title>
+  <desc id="desc">Logo da CorsaTube360 com casa e tipografia azul e branca.</desc>
+  <g transform="translate(8 16)">
+    <path d="M16 56L58 20L100 56V112H16V56Z" fill="#F6D06C"/>
+    <path d="M8 60L58 10L108 60" stroke="#F2674A" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M26 64H48V112H26V64Z" fill="#8C5A3C"/>
+    <path d="M64 52H90V76H64V52Z" fill="#72D2F6"/>
+    <path d="M69 57H85V71H69V57Z" fill="#BDEEFF"/>
+    <path d="M6 112H112" stroke="#78C273" stroke-width="10" stroke-linecap="round"/>
+    <path d="M58 22L26 58" stroke="#D84D37" stroke-width="6" stroke-linecap="round"/>
+    <path d="M58 22L90 58" stroke="#D84D37" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(142 32)">
+    <text x="0" y="72" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="700" letter-spacing="-2" fill="#FFFFFF">Corsa</text>
+    <text x="206" y="72" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="700" letter-spacing="-2" fill="#4DBDFF">tube</text>
+    <text x="347" y="72" font-family="Arial, Helvetica, sans-serif" font-size="84" font-weight="700" letter-spacing="-3" fill="#FFFFFF">360</text>
+    <path d="M401 28C447 6 515 6 569 28C593 38 612 54 624 75" stroke="#26B8FF" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <path d="M432 101C479 112 539 108 587 91C603 85 617 77 626 67" stroke="#F4F7FB" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.95"/>
+    <path d="M555 22C587 34 611 56 623 83" stroke="#47C7FF" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.96"/>
+    <path d="M563 31C590 43 608 59 617 79" stroke="#D9F6FF" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.98"/>
+  </g>
+</svg>

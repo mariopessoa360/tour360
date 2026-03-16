@@ -32,15 +32,6 @@ function init() {
         viewer.addEventListener('ready', () => {
             viewer.zoom(0);
         });
-
-        const requestFs = () => {
-            const el = document.documentElement;
-            if (el.requestFullscreen) {
-                el.requestFullscreen().catch(() => {});
-            }
-        };
-
-        document.addEventListener('click', requestFs, { once: true });
     } catch (error) {
         console.error('Erro ao abrir foto 360 em tela cheia', error);
         container.innerHTML = `<img src="${image}" alt="${title}" style="width:100%;height:100%;object-fit:contain;">`;

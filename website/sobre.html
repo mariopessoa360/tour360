@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar">
             <div class="container">
-                <h1 class="logo">🏠 Tour 360 <span class="logo-credit">By CorsaTube360</span></h1>
+                <h1 class="logo"><a class="logo-home-link logo-image-link" href="index.html#home" aria-label="Voltar para o início"><img class="site-logo-image" src="images/corsatube360-logo.png?v=2" alt="CorsaTube360"></a></h1>
                 <button class="nav-toggle" aria-label="Abrir menu">
                     <span class="hamburger"></span>
                 </button>
@@ -31,8 +31,10 @@
                     <p class="about-kicker">Apresentação Imobiliária Imersiva</p>
                     <h2>Sobre o Tour 360 da CorsaTube360</h2>
                     <p class="about-intro">
-                        A CorsaTube360 transforma a forma de apresentar imóveis com conteúdo visual estratégico,
+                        A CorsaTube360 transforma a forma de apresentar negócios com conteúdo visual estratégico,
                         combinando experiência imersiva, narrativa comercial e tecnologia para acelerar a decisão do cliente.
+                        O serviço atende corretores, imobiliárias, proprietários, empresários e qualquer empreendimento
+                        que queira mostrar espaços, estrutura e diferenciais de forma profissional.
                     </p>
                     <div class="hero-actions">
                         <a href="#contact" class="btn btn-primary">Falar com a equipe</a>
@@ -59,31 +61,47 @@
         <section class="about-section about-solutions">
             <div class="container">
                 <h2>Formatos de Entrega</h2>
-                <p class="about-intro">Cada formato atende uma etapa da jornada do comprador e aumenta a percepção de valor do imóvel.</p>
+                <p class="about-intro">Cada formato atende uma etapa da jornada do cliente e aumenta a percepção de valor do seu empreendimento, produto ou serviço.</p>
 
                 <div class="about-solutions-grid">
                     <article class="about-solution-card">
                         <span class="about-badge">01</span>
                         <h3>Site de Exposição com Fotos 360 por Ambiente</h3>
-                        <p>Páginas organizadas por cômodo para o cliente entender circulação, dimensões e acabamento antes da visita presencial.</p>
+                        <p>Páginas organizadas por ambiente para o cliente entender circulação, dimensões e estrutura antes da visita presencial.</p>
+                        <video class="about-solution-video" controls preload="metadata" playsinline>
+                            <source src="videos/sobre-card-01.mp4" type="video/mp4">
+                            Seu navegador não suporta a reprodução de vídeo.
+                        </video>
                     </article>
 
                     <article class="about-solution-card">
                         <span class="about-badge">02</span>
                         <h3>Vídeo de Tour Completo dos Ambientes</h3>
-                        <p>Vídeo em sequência lógica destacando diferenciais do imóvel para uso em site, redes sociais e campanhas comerciais.</p>
+                        <p>Vídeo em sequência lógica destacando diferenciais do negócio para uso em site, redes sociais e campanhas comerciais.</p>
+                        <video class="about-solution-video" controls preload="metadata" playsinline>
+                            <source src="videos/sobre-card-02.mp4" type="video/mp4">
+                            Seu navegador não suporta a reprodução de vídeo.
+                        </video>
                     </article>
 
                     <article class="about-solution-card">
                         <span class="about-badge">03</span>
                         <h3>Vídeo com Corretor ou Dono em Cada Cômodo</h3>
                         <p>Apresentação guiada com explicação do que cada ambiente oferece, reforçando confiança e contexto real da negociação.</p>
+                        <video class="about-solution-video" controls preload="metadata" playsinline>
+                            <source src="videos/sobre-card-03.mp4" type="video/mp4">
+                            Seu navegador não suporta a reprodução de vídeo.
+                        </video>
                     </article>
 
                     <article class="about-solution-card">
                         <span class="about-badge">04</span>
-                        <h3>Tour 360 Navegável Entre Cômodos</h3>
-                        <p>Experiência interativa em que o cliente navega livremente pelo imóvel, simulando uma visita com autonomia.</p>
+                        <h3>Tour 360 Navegável Entre Ambientes</h3>
+                        <p>Experiência interativa em que o cliente navega livremente pelo espaço, simulando uma visita com autonomia.</p>
+                        <video class="about-solution-video" controls preload="metadata" playsinline>
+                            <source src="videos/sobre-card-04.mp4" type="video/mp4">
+                            Seu navegador não suporta a reprodução de vídeo.
+                        </video>
                     </article>
                 </div>
             </div>
@@ -96,7 +114,7 @@
                     <article class="about-flow-step">
                         <span>1</span>
                         <h3>Briefing Comercial</h3>
-                        <p>Mapeamos público, perfil do imóvel e objetivos de venda para definir a melhor estratégia de apresentação.</p>
+                        <p>Mapeamos público, perfil do empreendimento e objetivos de venda para definir a melhor estratégia de apresentação.</p>
                     </article>
                     <article class="about-flow-step">
                         <span>2</span>
@@ -120,12 +138,12 @@
         <section id="contact" class="contact-section about-contact-section">
             <div class="container">
                 <h2>Fale com a CorsaTube360</h2>
-                <p class="about-intro">Quer aplicar essas soluções no seu imóvel ou empreendimento? Envie sua mensagem.</p>
+                <p class="about-intro">Quer aplicar essas soluções no seu imóvel, empresa ou empreendimento? Envie sua mensagem.</p>
                 <form class="contact-form about-contact-form">
                     <input type="text" name="name" placeholder="Seu nome" required>
                     <input type="email" name="email" placeholder="Seu email" required>
                     <input type="tel" name="phone" placeholder="Telefone / WhatsApp" inputmode="tel" pattern="[0-9\s\-\(\)\+]{10,}" title="Informe um telefone válido com DDD" required>
-                    <textarea name="message" placeholder="Conte sobre seu imóvel ou empreendimento" rows="5" required></textarea>
+                    <textarea name="message" placeholder="Conte sobre seu negócio, imóvel ou empreendimento" rows="5" required></textarea>
                     <input type="hidden" name="_subject" value="Contato - Página Sobre - Tour 360">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="text" name="_honey" style="display:none">

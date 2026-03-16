@@ -76,8 +76,27 @@ header {
 }
 
 .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.logo-home-link,
+.logo-home-link:visited {
+    color: inherit;
+    text-decoration: none;
+}
+
+.logo-image-link {
+    display: inline-flex;
+    align-items: center;
+}
+
+.site-logo-image {
+    display: block;
+    width: auto;
+    height: 40px;
+    max-width: min(56vw, 460px);
 }
 
 .nav-links {
@@ -346,6 +365,11 @@ footer {
 
 /* Responsivo */
 @media (max-width: 768px) {
+    .site-logo-image {
+        height: 30px;
+        max-width: 74vw;
+    }
+
     .hero h2 {
         font-size: 1.8rem;
     }
