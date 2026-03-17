@@ -60,7 +60,7 @@ body {
 
 /* Header */
 header {
-    background-color: var(--primary-color);
+    background-color: #3a5570;
     color: white;
     padding: 1rem 0;
     position: sticky;

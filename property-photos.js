@@ -213,9 +213,50 @@ function openFullscreen(photo, propertyTitle) {
     window.open(url.toString(), '_blank', 'noopener,noreferrer');
 }
 
+// Intersection Observer para lazy loading dos viewers 360
+const lazyViewerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.viewerLoaded) {
+            const photo = JSON.parse(entry.target.dataset.photoJson);
+            const propertyTitle = entry.target.dataset.propertyTitle;
+            const viewerContainer = entry.target.querySelector('.photo-viewer');
+            
+            if (viewerContainer && viewerContainer.id) {
+                entry.target.dataset.viewerLoaded = 'true';
+                
+                requestAnimationFrame(() => {
+                    try {
+                        new Viewer({
+                            container: viewerContainer,
+                            panorama: photo.file.startsWith('http') ? photo.file : 'https://corsatube360.com.br/' + (photo.file.startsWith('/') ? photo.file.slice(1) : photo.file),
+                            navbar: false,
+                            mousemove: true,
+                            mousewheel: false,
+                            touchmoveTwoFingers: false,
+                            defaultZoomLvl: 35,
+                            minFov: 25,
+                            maxFov: 100,
+                            loadingTxt: 'Carregando...'
+                        });
+                    } catch (error) {
+                        console.error('Erro no preview 360', error);
+                        viewerContainer.innerHTML = '';
+                        const absoluteUrl = photo.file.startsWith('http') ? photo.file : 'https://corsatube360.com.br/' + (photo.file.startsWith('/') ? photo.file.slice(1) : photo.file);
+                        viewerContainer.style.background = `url(${absoluteUrl}) center/cover no-repeat`;
+                    }
+                });
+                
+                lazyViewerObserver.unobserve(entry.target);
+            }
+        }
+    });
+}, { rootMargin: '100px' });
+
 function renderPhotoCard(photo, propertyTitle) {
     const card = document.createElement('article');
     card.className = 'photo-card';
+    card.dataset.photoJson = JSON.stringify(photo);
+    card.dataset.propertyTitle = propertyTitle;
 
     const preview = document.createElement('div');
     preview.className = 'photo-preview';
@@ -264,27 +305,8 @@ function renderPhotoCard(photo, propertyTitle) {
     button.addEventListener('click', () => openFullscreen(photo, propertyTitle));
     card.appendChild(button);
 
-    requestAnimationFrame(() => {
-        try {
-            new Viewer({
-                container: viewerContainer,
-                panorama: photo.file.startsWith('http') ? photo.file : 'https://corsatube360.com.br/' + (photo.file.startsWith('/') ? photo.file.slice(1) : photo.file),
-                navbar: false,
-                mousemove: true,
-                mousewheel: false,
-                touchmoveTwoFingers: false,
-                defaultZoomLvl: 35,
-                minFov: 25,
-                maxFov: 100,
-                loadingTxt: 'Carregando...'
-            });
-        } catch (error) {
-            console.error('Erro no preview 360', error);
-            viewerContainer.innerHTML = '';
-            const absoluteUrl = photo.file.startsWith('http') ? photo.file : 'https://corsatube360.com.br/' + (photo.file.startsWith('/') ? photo.file.slice(1) : photo.file);
-            viewerContainer.style.background = `url(${absoluteUrl}) center/cover no-repeat`;
-        }
-    });
+    // Adicionar card ao observer para lazy loading
+    lazyViewerObserver.observe(card);
 
     return card;
 }
