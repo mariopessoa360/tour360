@@ -4,7 +4,7 @@ const properties = {
     flamengo: {
         title: 'Apartamento Flamengo Vista Baía',
         subtitle: 'Rio de Janeiro - RJ',
-        price: 'R$ 2.600.000,00',
+        price: 'R$ 2.900.000,00',
         tourUrl: 'https://corsatube360.com.br/tour360/',
         meta: {
             area: '200m² Área',
