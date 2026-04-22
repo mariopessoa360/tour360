@@ -4,7 +4,7 @@ const properties = {
     flamengo: {
         title: 'Apartamento Flamengo Vista Baía',
         subtitle: 'Rio de Janeiro - RJ',
-        price: 'R$ 4.000.000,00',
+        price: 'R$ 2.600.000,00',
         tourUrl: 'https://corsatube360.com.br/tour360/',
         meta: {
             area: '200m² Área',
@@ -43,7 +43,7 @@ const properties = {
             },
             {
                 id: 'vagas',
-                title: 'Fotos de Garagem / Vagas',
+                title: 'Fotos Extras',
                 photos: [
                     { title: 'Acesso 1', file: 'images/cards/corredor1-4k.jpg' },
                     { title: 'Acesso 2', file: 'images/cards/corredor2-4k.jpg' }
@@ -92,7 +92,7 @@ const properties = {
             },
             {
                 id: 'vagas',
-                title: 'Fotos de Garagem / Vagas',
+                title: 'Fotos Extras',
                 photos: [
                     { title: 'Acesso 1', file: 'images/cards/corredor1-4k.jpg' },
                     { title: 'Acesso 2', file: 'images/cards/corredor2-4k.jpg' }
@@ -141,7 +141,7 @@ const properties = {
             },
             {
                 id: 'vagas',
-                title: 'Fotos de Garagem / Vagas',
+                title: 'Fotos Extras',
                 photos: [
                     { title: 'Acesso 1', file: 'images/cards/corredor1-4k.jpg' },
                     { title: 'Acesso 2', file: 'images/cards/corredor2-4k.jpg' }
