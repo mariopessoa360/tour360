@@ -213,6 +213,138 @@ function openFullscreen(photo, propertyTitle) {
     window.open(url.toString(), '_blank', 'noopener,noreferrer');
 }
 
+let drawerPhotos = [];
+let drawerPropertyTitle = '';
+let drawerCurrentIndex = 0;
+let drawerViewer = null;
+
+function getAbsolutePhotoUrl(photo) {
+    return photo.file.startsWith('http')
+        ? photo.file
+        : 'https://corsatube360.com.br/' + (photo.file.startsWith('/') ? photo.file.slice(1) : photo.file);
+}
+
+function getPhotoDrawer() {
+    let drawer = document.getElementById('photo-drawer');
+    if (drawer) {
+        return drawer;
+    }
+
+    drawer = document.createElement('aside');
+    drawer.id = 'photo-drawer';
+    drawer.className = 'photo-drawer';
+    drawer.setAttribute('aria-hidden', 'true');
+    drawer.innerHTML = `
+        <div class="photo-drawer-backdrop" data-photo-drawer-close></div>
+        <div class="photo-drawer-panel" role="dialog" aria-modal="true" aria-labelledby="photo-drawer-title">
+            <div class="photo-drawer-header">
+                <div>
+                    <p class="photo-drawer-eyebrow"></p>
+                    <h3 id="photo-drawer-title"></h3>
+                </div>
+                <button type="button" class="photo-drawer-close" data-photo-drawer-close aria-label="Fechar">×</button>
+            </div>
+            <div class="photo-drawer-viewer" id="photo-drawer-viewer"></div>
+            <div class="photo-drawer-footer">
+                <button type="button" class="photo-drawer-nav photo-drawer-prev" aria-label="Foto anterior">‹</button>
+                <span class="photo-drawer-counter"></span>
+                <button type="button" class="photo-drawer-nav photo-drawer-next" aria-label="Próxima foto">›</button>
+            </div>
+        </div>
+    `;
+
+    drawer.querySelectorAll('[data-photo-drawer-close]').forEach((button) => {
+        button.addEventListener('click', closePhotoDrawer);
+    });
+    drawer.querySelector('.photo-drawer-prev').addEventListener('click', () => showDrawerPhoto(drawerCurrentIndex - 1));
+    drawer.querySelector('.photo-drawer-next').addEventListener('click', () => showDrawerPhoto(drawerCurrentIndex + 1));
+    document.body.appendChild(drawer);
+
+    return drawer;
+}
+
+function showDrawerPhoto(index) {
+    if (!drawerPhotos.length) {
+        return;
+    }
+
+    drawerCurrentIndex = (index + drawerPhotos.length) % drawerPhotos.length;
+    const photo = drawerPhotos[drawerCurrentIndex];
+    const drawer = getPhotoDrawer();
+    const viewerContainer = drawer.querySelector('#photo-drawer-viewer');
+    const title = drawer.querySelector('#photo-drawer-title');
+    const eyebrow = drawer.querySelector('.photo-drawer-eyebrow');
+    const counter = drawer.querySelector('.photo-drawer-counter');
+    const absoluteUrl = getAbsolutePhotoUrl(photo);
+
+    title.textContent = photo.title;
+    eyebrow.textContent = drawerPropertyTitle;
+    counter.textContent = `${drawerCurrentIndex + 1} / ${drawerPhotos.length}`;
+
+    if (drawerViewer) {
+        drawerViewer.destroy();
+        drawerViewer = null;
+    }
+
+    viewerContainer.innerHTML = '';
+    viewerContainer.style.background = `url(${absoluteUrl}) center/cover no-repeat`;
+
+    requestAnimationFrame(() => {
+        try {
+            drawerViewer = new Viewer({
+                container: viewerContainer,
+                panorama: absoluteUrl,
+                navbar: ['zoom', 'fullscreen'],
+                mousewheel: true,
+                touchmoveTwoFingers: false,
+                defaultZoomLvl: 20,
+            });
+        } catch (error) {
+            console.error('Erro no drawer 360', error);
+        }
+    });
+}
+
+function openPhotoDrawer(index, propertyTitle) {
+    drawerPropertyTitle = propertyTitle;
+    const drawer = getPhotoDrawer();
+    drawer.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('photo-drawer-open');
+    showDrawerPhoto(index);
+}
+
+function closePhotoDrawer() {
+    const drawer = document.getElementById('photo-drawer');
+    if (!drawer) {
+        return;
+    }
+
+    drawer.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('photo-drawer-open');
+
+    if (drawerViewer) {
+        drawerViewer.destroy();
+        drawerViewer = null;
+    }
+}
+
+document.addEventListener('keydown', (event) => {
+    const drawer = document.getElementById('photo-drawer');
+    if (!drawer?.classList.contains('is-open')) {
+        return;
+    }
+
+    if (event.key === 'Escape') {
+        closePhotoDrawer();
+    } else if (event.key === 'ArrowLeft') {
+        showDrawerPhoto(drawerCurrentIndex - 1);
+    } else if (event.key === 'ArrowRight') {
+        showDrawerPhoto(drawerCurrentIndex + 1);
+    }
+});
+
 // Intersection Observer para lazy loading dos viewers 360
 const lazyViewerObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -252,7 +384,7 @@ const lazyViewerObserver = new IntersectionObserver((entries) => {
     });
 }, { rootMargin: '100px' });
 
-function renderPhotoCard(photo, propertyTitle) {
+function renderPhotoCard(photo, propertyTitle, photoIndex) {
     const card = document.createElement('article');
     card.className = 'photo-card';
     card.dataset.photoJson = JSON.stringify(photo);
@@ -281,7 +413,7 @@ function renderPhotoCard(photo, propertyTitle) {
 
     preview.addEventListener('pointerup', (event) => {
         if (!pointerStart) {
-            openFullscreen(photo, propertyTitle);
+            openPhotoDrawer(photoIndex, propertyTitle);
             return;
         }
 
@@ -290,7 +422,7 @@ function renderPhotoCard(photo, propertyTitle) {
         pointerStart = null;
 
         if (dx < 8 && dy < 8) {
-            openFullscreen(photo, propertyTitle);
+            openPhotoDrawer(photoIndex, propertyTitle);
         }
     });
 
@@ -301,8 +433,8 @@ function renderPhotoCard(photo, propertyTitle) {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'photo-open';
-    button.textContent = `Abrir em tela cheia · ${photo.title}`;
-    button.addEventListener('click', () => openFullscreen(photo, propertyTitle));
+    button.textContent = `Abrir galeria · ${photo.title}`;
+    button.addEventListener('click', () => openPhotoDrawer(photoIndex, propertyTitle));
     card.appendChild(button);
 
     // Adicionar card ao observer para lazy loading
@@ -314,6 +446,10 @@ function renderPhotoCard(photo, propertyTitle) {
 function renderPhotoSections(property, propertyTitle) {
     const sectionsContainer = document.getElementById('photos-grid');
     sectionsContainer.innerHTML = '';
+    drawerPhotos = property.sections.flatMap((section) => section.photos);
+    drawerPropertyTitle = propertyTitle;
+
+    let photoIndex = 0;
 
     property.sections.forEach((section) => {
         const sectionElement = document.createElement('section');
@@ -329,7 +465,8 @@ function renderPhotoSections(property, propertyTitle) {
         grid.className = 'photo-category-grid';
 
         section.photos.forEach((photo) => {
-            grid.appendChild(renderPhotoCard(photo, propertyTitle));
+            grid.appendChild(renderPhotoCard(photo, propertyTitle, photoIndex));
+            photoIndex += 1;
         });
 
         sectionElement.appendChild(grid);
@@ -503,7 +640,7 @@ function init() {
     const siteLogo = document.getElementById('site-logo');
 
     title.textContent = property.title;
-    subtitle.textContent = `${property.subtitle} · Clique em qualquer foto 360 para abrir em tela cheia.`;
+    subtitle.textContent = `${property.subtitle} · Clique em qualquer foto 360 para abrir a galeria.`;
     if (price) {
         if (property.price) {
             price.textContent = property.price;
