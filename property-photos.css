@@ -214,20 +214,38 @@
     background: #000;
 }
 
+.photo-drawer-viewer-wrap {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+}
+
 .photo-drawer-footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
     padding: 0.9rem 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .photo-drawer-nav {
-    width: 46px;
-    height: 46px;
-    font-size: 2.1rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px;
+    height: 52px;
+    font-size: 2.3rem;
     line-height: 1;
+    z-index: 5;
+    backdrop-filter: blur(3px);
+}
+
+.photo-drawer-prev {
+    left: 14px;
+}
+
+.photo-drawer-next {
+    right: 14px;
 }
 
 .photo-drawer-close:hover,
@@ -253,5 +271,19 @@
 
     .photo-drawer-footer {
         padding-bottom: max(0.9rem, env(safe-area-inset-bottom));
+    }
+
+    .photo-drawer-nav {
+        width: 46px;
+        height: 46px;
+        font-size: 2.1rem;
+    }
+
+    .photo-drawer-prev {
+        left: 10px;
+    }
+
+    .photo-drawer-next {
+        right: 10px;
     }
 }
