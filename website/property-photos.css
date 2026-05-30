@@ -123,3 +123,135 @@
 .detail-contact-form {
     max-width: 680px;
 }
+
+.photo-drawer-open {
+    overflow: hidden;
+}
+
+.photo-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.photo-drawer.is-open {
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.photo-drawer-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 20, 32, 0.58);
+    opacity: 0;
+    transition: opacity 0.22s ease;
+}
+
+.photo-drawer.is-open .photo-drawer-backdrop {
+    opacity: 1;
+}
+
+.photo-drawer-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: min(920px, 92vw);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #0b1220;
+    color: #fff;
+    box-shadow: -18px 0 42px rgba(0, 0, 0, 0.28);
+    transform: translateX(100%);
+    transition: transform 0.26s ease;
+}
+
+.photo-drawer.is-open .photo-drawer-panel {
+    transform: translateX(0);
+}
+
+.photo-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.photo-drawer-eyebrow {
+    margin: 0 0 0.2rem;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.82rem;
+}
+
+.photo-drawer-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.photo-drawer-close,
+.photo-drawer-nav {
+    border: none;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    cursor: pointer;
+}
+
+.photo-drawer-close {
+    width: 42px;
+    height: 42px;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.photo-drawer-viewer {
+    flex: 1;
+    min-height: 0;
+    background: #000;
+}
+
+.photo-drawer-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.photo-drawer-nav {
+    width: 46px;
+    height: 46px;
+    font-size: 2.1rem;
+    line-height: 1;
+}
+
+.photo-drawer-close:hover,
+.photo-drawer-nav:hover {
+    background: rgba(255, 255, 255, 0.22);
+}
+
+.photo-drawer-counter {
+    min-width: 74px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.78);
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .photo-drawer-panel {
+        width: 100vw;
+    }
+
+    .photo-drawer-header {
+        padding: 0.85rem 1rem;
+    }
+
+    .photo-drawer-footer {
+        padding-bottom: max(0.9rem, env(safe-area-inset-bottom));
+    }
+}
