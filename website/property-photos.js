@@ -244,11 +244,13 @@ function getPhotoDrawer() {
                 </div>
                 <button type="button" class="photo-drawer-close" data-photo-drawer-close aria-label="Fechar">×</button>
             </div>
-            <div class="photo-drawer-viewer" id="photo-drawer-viewer"></div>
-            <div class="photo-drawer-footer">
+            <div class="photo-drawer-viewer-wrap">
                 <button type="button" class="photo-drawer-nav photo-drawer-prev" aria-label="Foto anterior">‹</button>
-                <span class="photo-drawer-counter"></span>
+                <div class="photo-drawer-viewer" id="photo-drawer-viewer"></div>
                 <button type="button" class="photo-drawer-nav photo-drawer-next" aria-label="Próxima foto">›</button>
+            </div>
+            <div class="photo-drawer-footer">
+                <span class="photo-drawer-counter"></span>
             </div>
         </div>
     `;
