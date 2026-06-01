@@ -217,11 +217,76 @@
     background: #000;
 }
 
+.photo-drawer-content {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
 .photo-drawer-viewer-wrap {
     position: relative;
     flex: 1;
     min-height: 0;
     overflow: hidden;
+}
+
+.photo-drawer-plan {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 0.9rem;
+    background: #111b2a;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.photo-plan-title {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+.photo-plan-canvas {
+    position: relative;
+    flex: 1;
+    min-height: 180px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #f7fafc;
+}
+
+.photo-plan-drawing {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.photo-plan-pin {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #0f3f1f;
+    border-radius: 999px;
+    background: #38d96d;
+    color: #08210f;
+    font-size: 0.72rem;
+    font-weight: 800;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.22);
+}
+
+.photo-plan-pin.is-active {
+    width: 32px;
+    height: 32px;
+    background: #ff3f33;
+    color: #fff;
+    border-color: #fff;
+    z-index: 2;
+}
+
+.photo-plan-pin span {
+    pointer-events: none;
 }
 
 .photo-drawer-footer {
@@ -277,6 +342,17 @@
 
     .photo-drawer-footer {
         padding-bottom: max(0.9rem, env(safe-area-inset-bottom));
+    }
+
+    .photo-drawer-content {
+        flex-direction: column;
+    }
+
+    .photo-drawer-plan {
+        width: auto;
+        height: 180px;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
     }
 
     .photo-drawer-nav {
