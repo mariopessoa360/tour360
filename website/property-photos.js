@@ -224,6 +224,95 @@ function getAbsolutePhotoUrl(photo) {
         : 'https://corsatube360.com.br/' + (photo.file.startsWith('/') ? photo.file.slice(1) : photo.file);
 }
 
+function getPlanKey(photo) {
+    return photo.file
+        .split('/')
+        .pop()
+        .replace(/-4k\.jpg$/i, '')
+        .replace(/\.(jpg|png|webp)$/i, '');
+}
+
+function getPhotoPlanPosition(photo, index) {
+    const positions = {
+        sala1: [20, 28],
+        salavista1: [28, 28],
+        salavista2: [36, 28],
+        cozinha1: [33, 61],
+        cozinha2: [39, 65],
+        cozinha3: [45, 69],
+        quarto1: [62, 24],
+        quarto1vista: [69, 24],
+        quarto2: [82, 25],
+        quarto2vista: [88, 25],
+        quarto3: [76, 52],
+        quarto3vista: [84, 52],
+        banheiromeio: [63, 72],
+        banheiroantesala: [50, 42],
+        banheiroquarto3: [86, 72],
+        corredor1: [47, 43],
+        corredor2: [54, 47],
+        corredor3: [60, 53],
+    };
+    const key = getPlanKey(photo);
+    if (positions[key]) {
+        return positions[key];
+    }
+
+    const col = index % 5;
+    const row = Math.floor(index / 5);
+    return [18 + col * 14, 78 + row * 8];
+}
+
+function renderDrawerPlan(drawer) {
+    const plan = drawer.querySelector('.photo-drawer-plan');
+    if (!plan) {
+        return;
+    }
+
+    const pins = drawerPhotos.map((photo, index) => {
+        const [x, y] = getPhotoPlanPosition(photo, index);
+        const activeClass = index === drawerCurrentIndex ? ' is-active' : '';
+        return `
+            <button type="button"
+                class="photo-plan-pin${activeClass}"
+                style="left: ${x}%; top: ${y}%"
+                data-photo-index="${index}"
+                aria-label="${photo.title}">
+                <span>${index + 1}</span>
+            </button>
+        `;
+    }).join('');
+
+    plan.innerHTML = `
+        <div class="photo-plan-title">Planta do imovel</div>
+        <div class="photo-plan-canvas">
+            <svg class="photo-plan-drawing" viewBox="0 0 100 70" aria-hidden="true" focusable="false">
+                <rect x="3" y="3" width="94" height="64" rx="2" fill="#f7fafc" stroke="#d4dde7" stroke-width="1.4" />
+                <rect x="7" y="7" width="35" height="22" fill="#eaf4ff" stroke="#9cafc4" />
+                <rect x="7" y="35" width="30" height="25" fill="#fff3e6" stroke="#9cafc4" />
+                <rect x="45" y="7" width="13" height="53" fill="#f2f5f7" stroke="#9cafc4" />
+                <rect x="61" y="7" width="30" height="20" fill="#ecf8f1" stroke="#9cafc4" />
+                <rect x="61" y="31" width="30" height="23" fill="#ecf8f1" stroke="#9cafc4" />
+                <rect x="61" y="56" width="12" height="8" fill="#f5edf9" stroke="#9cafc4" />
+                <rect x="76" y="56" width="15" height="8" fill="#f5edf9" stroke="#9cafc4" />
+                <text x="10" y="19" font-size="4" fill="#476078">Sala</text>
+                <text x="10" y="49" font-size="4" fill="#6f563b">Cozinha</text>
+                <text x="64" y="18" font-size="4" fill="#3f654f">Quartos</text>
+            </svg>
+            ${pins}
+        </div>
+    `;
+
+    plan.querySelectorAll('.photo-plan-pin').forEach((pin) => {
+        pin.addEventListener('click', () => {
+            const nextIndex = Number(pin.dataset.photoIndex);
+            if (Number.isInteger(nextIndex)) {
+                showDrawerPhoto(nextIndex);
+            }
+        });
+    });
+}
+
 function getPhotoDrawer() {
     let drawer = document.getElementById('photo-drawer');
     if (drawer) {
@@ -244,10 +333,13 @@ function getPhotoDrawer() {
                 </div>
                 <button type="button" class="photo-drawer-close" data-photo-drawer-close aria-label="Fechar">×</button>
             </div>
-            <div class="photo-drawer-viewer-wrap">
+            <div class="photo-drawer-content">
+                <div class="photo-drawer-viewer-wrap">
                 <button type="button" class="photo-drawer-nav photo-drawer-prev" aria-label="Foto anterior">‹</button>
                 <div class="photo-drawer-viewer" id="photo-drawer-viewer"></div>
                 <button type="button" class="photo-drawer-nav photo-drawer-next" aria-label="Próxima foto">›</button>
+                </div>
+                <div class="photo-drawer-plan" aria-label="Planta do imovel"></div>
             </div>
             <div class="photo-drawer-footer">
                 <span class="photo-drawer-counter"></span>
@@ -282,6 +374,7 @@ function showDrawerPhoto(index) {
     title.textContent = photo.title;
     eyebrow.textContent = drawerPropertyTitle;
     counter.textContent = `${drawerCurrentIndex + 1} / ${drawerPhotos.length}`;
+    renderDrawerPlan(drawer);
 
     if (drawerViewer) {
         drawerViewer.destroy();
