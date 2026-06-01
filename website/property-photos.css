@@ -155,21 +155,24 @@
 
 .photo-drawer-panel {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: min(920px, 92vw);
-    height: 100%;
+    top: 50%;
+    left: 50%;
+    width: min(980px, 94vw);
+    height: min(84vh, 760px);
     display: flex;
     flex-direction: column;
     background: #0b1220;
     color: #fff;
-    box-shadow: -18px 0 42px rgba(0, 0, 0, 0.28);
-    transform: translateX(100%);
-    transition: transform 0.26s ease;
+    border-radius: 14px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.42);
+    transform: translate(-50%, -46%) scale(0.98);
+    opacity: 0;
+    transition: transform 0.22s ease, opacity 0.22s ease;
 }
 
 .photo-drawer.is-open .photo-drawer-panel {
-    transform: translateX(0);
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
 }
 
 .photo-drawer-header {
@@ -209,8 +212,8 @@
 }
 
 .photo-drawer-viewer {
-    flex: 1;
-    min-height: 0;
+    width: 100%;
+    height: 100%;
     background: #000;
 }
 
@@ -218,6 +221,7 @@
     position: relative;
     flex: 1;
     min-height: 0;
+    overflow: hidden;
 }
 
 .photo-drawer-footer {
@@ -262,7 +266,9 @@
 
 @media (max-width: 768px) {
     .photo-drawer-panel {
-        width: 100vw;
+        width: 96vw;
+        height: min(78vh, 680px);
+        border-radius: 12px;
     }
 
     .photo-drawer-header {
