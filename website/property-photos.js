@@ -301,6 +301,12 @@ function showDrawerPhoto(index) {
                 touchmoveTwoFingers: false,
                 defaultZoomLvl: 0,
             });
+            drawerViewer.addEventListener('ready', () => {
+                drawerViewer.zoom(0);
+            });
+            drawerViewer.addEventListener('panorama-loaded', () => {
+                drawerViewer.zoom(0);
+            });
         } catch (error) {
             console.error('Erro no drawer 360', error);
         }
