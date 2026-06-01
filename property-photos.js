@@ -299,7 +299,7 @@ function showDrawerPhoto(index) {
                 navbar: ['zoom', 'fullscreen'],
                 mousewheel: true,
                 touchmoveTwoFingers: false,
-                defaultZoomLvl: 20,
+                defaultZoomLvl: 0,
             });
         } catch (error) {
             console.error('Erro no drawer 360', error);
