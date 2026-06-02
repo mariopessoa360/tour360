@@ -355,6 +355,13 @@
         border-top: 1px solid rgba(255, 255, 255, 0.12);
     }
 
+    .photo-plan-canvas {
+        flex: none;
+        width: 100%;
+        aspect-ratio: 100 / 70;
+        min-height: 0;
+    }
+
     .photo-drawer-nav {
         width: 46px;
         height: 46px;
