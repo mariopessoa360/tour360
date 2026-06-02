@@ -233,25 +233,69 @@ function getPlanKey(photo) {
 }
 
 function getPhotoPlanPosition(photo, index) {
+    const pointNumber = index + 1;
+    const isMobilePlan = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
+
+    const positionsByPointNumberDesktop = {
+        1: [14, 43], // Sala
+        2: [21, 43], // Sala
+        3: [28, 43], // Sala
+        4: [23, 56], // Cozinha
+        5: [66, 42], // Quarto 1
+        6: [75, 42], // Quarto 2
+        7: [84, 42], // Quarto 3
+        8: [67, 60], // Banheiros
+        9: [84, 60], // Banheiros
+        10: [90, 60], // Banheiros
+        11: [50, 44], // Corredor
+        12: [50, 50], // Corredor
+    };
+
+    const positionsByPointNumberMobile = {
+        1: [17, 31.4], // Sala (microajuste: subir)
+        2: [24, 31.4], // Sala (microajuste: subir)
+        3: [31, 31.4], // Sala (microajuste: subir)
+        4: [22, 64], // Cozinha
+        5: [66, 31.4], // Quarto 1 (microajuste: subir)
+        6: [75, 31.4], // Quarto 2 (microajuste: subir)
+        7: [86, 31.4], // Quarto 3 (microajuste: subir)
+        8: [67, 83], // Banheiros
+        9: [84, 83], // Banheiros
+        10: [90, 83], // Banheiros
+        11: [50, 45], // Corredor
+        12: [50, 51], // Corredor
+    };
+
+    const positionsByPointNumber = isMobilePlan
+        ? positionsByPointNumberMobile
+        : positionsByPointNumberDesktop;
+
+    if (positionsByPointNumber[pointNumber]) {
+        return positionsByPointNumber[pointNumber];
+    }
+
     const positions = {
-        sala1: [20, 28],
-        salavista1: [28, 28],
-        salavista2: [36, 28],
-        cozinha1: [33, 61],
-        cozinha2: [39, 65],
-        cozinha3: [45, 69],
-        quarto1: [62, 24],
-        quarto1vista: [69, 24],
-        quarto2: [82, 25],
-        quarto2vista: [88, 25],
-        quarto3: [76, 52],
-        quarto3vista: [84, 52],
-        banheiromeio: [63, 72],
-        banheiroantesala: [50, 42],
-        banheiroquarto3: [86, 72],
-        corredor1: [47, 43],
-        corredor2: [54, 47],
-        corredor3: [60, 53],
+        // Drawer map coordinates (x%, y%) aligned with the small SVG floor plan.
+        // Required layout: 1,2,3 in Sala; 4 Cozinha; 5,6,7 Quartos;
+        // 8,9,10 Banheiros; 11,12 Corredor.
+        sala1: [14, 20],
+        salavista1: [22, 20],
+        salavista2: [30, 20],
+        cozinha1: [23, 53],
+        cozinha2: [30, 53],
+        cozinha3: [34, 56],
+        quarto1: [69, 18],
+        quarto1vista: [76, 18],
+        quarto2: [85, 19],
+        quarto2vista: [86, 42],
+        quarto3: [77, 42],
+        quarto3vista: [83, 42],
+        banheiromeio: [67, 63],
+        banheiroantesala: [84, 63],
+        banheiroquarto3: [90, 63],
+        corredor1: [50, 33],
+        corredor2: [50, 40],
+        corredor3: [50, 48],
     };
     const key = getPlanKey(photo);
     if (positions[key]) {
@@ -291,13 +335,14 @@ function renderDrawerPlan(drawer) {
                 <rect x="7" y="7" width="35" height="22" fill="#eaf4ff" stroke="#9cafc4" />
                 <rect x="7" y="35" width="30" height="25" fill="#fff3e6" stroke="#9cafc4" />
                 <rect x="45" y="7" width="13" height="53" fill="#f2f5f7" stroke="#9cafc4" />
-                <rect x="61" y="7" width="30" height="20" fill="#ecf8f1" stroke="#9cafc4" />
-                <rect x="61" y="31" width="30" height="23" fill="#ecf8f1" stroke="#9cafc4" />
+                <rect x="61" y="7" width="9" height="20" fill="#ecf8f1" stroke="#9cafc4" />
+                <rect x="71" y="7" width="9" height="20" fill="#ecf8f1" stroke="#9cafc4" />
+                <rect x="81" y="7" width="10" height="20" fill="#ecf8f1" stroke="#9cafc4" />
                 <rect x="61" y="56" width="12" height="8" fill="#f5edf9" stroke="#9cafc4" />
                 <rect x="76" y="56" width="15" height="8" fill="#f5edf9" stroke="#9cafc4" />
-                <text x="10" y="19" font-size="4" fill="#476078">Sala</text>
-                <text x="10" y="49" font-size="4" fill="#6f563b">Cozinha</text>
-                <text x="64" y="18" font-size="4" fill="#3f654f">Quartos</text>
+                <text x="10" y="12" font-size="4" fill="#476078">Sala</text>
+                <text x="10" y="40" font-size="4" fill="#6f563b">Cozinha</text>
+                <text x="64" y="12" font-size="4" fill="#3f654f">Quartos</text>
             </svg>
             ${pins}
         </div>
