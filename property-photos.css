@@ -225,13 +225,14 @@
 
 .photo-drawer-viewer-wrap {
     position: relative;
-    flex: 1;
+    flex: 0 0 70%;
     min-height: 0;
     overflow: hidden;
 }
 
 .photo-drawer-plan {
-    width: 280px;
+    flex: 0 0 30%;
+    width: auto;
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
@@ -348,9 +349,14 @@
         flex-direction: column;
     }
 
+    .photo-drawer-viewer-wrap {
+        flex: 0 0 70%;
+    }
+
     .photo-drawer-plan {
+        flex: 0 0 30%;
         width: auto;
-        height: 180px;
+        height: auto;
         border-left: none;
         border-top: 1px solid rgba(255, 255, 255, 0.12);
     }
