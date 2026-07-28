@@ -560,6 +560,12 @@ const lazyViewerObserver = new IntersectionObserver((entries) => {
             const viewerContainer = entry.target.querySelector('.photo-viewer');
             
             if (viewerContainer && viewerContainer.id) {
+                if (viewerContainer.dataset.previewLoaded === 'true' || viewerContainer.querySelector('canvas')) {
+                    lazyViewerObserver.unobserve(entry.target);
+                    return;
+                }
+
+                viewerContainer.dataset.previewLoaded = 'true';
                 entry.target.dataset.viewerLoaded = 'true';
                 
                 requestAnimationFrame(() => {
@@ -606,6 +612,7 @@ function renderPhotoCard(photo, propertyTitle, photoIndex) {
     
     // Converter para URL absoluta para melhor compatibilidade mobile
     const absoluteUrl = getAbsolutePhotoUrl(photo);
+    viewerContainer.dataset.panorama = absoluteUrl;
     viewerContainer.style.background = `url(${absoluteUrl}) center/cover no-repeat`;
 
     preview.appendChild(viewerContainer);
