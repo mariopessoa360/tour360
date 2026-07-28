@@ -51,6 +51,56 @@ const properties = {
             }
         ]
     },
+    tijuca: {
+        title: 'Casa na Tijuca',
+        subtitle: 'Tijuca - Rio de Janeiro - RJ',
+        price: 'Casa 2 quartos - 100m²',
+        tourUrl: 'property-photos.html?property=tijuca',
+        meta: {
+            area: '100m² Área',
+            quartos: '2 Quartos',
+            banheiros: '1 Banheiro',
+            vagas: '2 lances de escada'
+        },
+        sections: [
+            {
+                id: 'overview',
+                title: 'Área Externa',
+                photos: [
+                    { title: 'Área Externa 1', file: 'tijuca-lite/area-externa1.jpg' },
+                    { title: 'Área Externa 2', file: 'tijuca-lite/area-externa2.jpg' },
+                    { title: 'Área Externa 3', file: 'tijuca-lite/area-externa3.jpg' },
+                    { title: 'Área Externa 4', file: 'tijuca-lite/area-externa0.jpg' }
+                ]
+            },
+            {
+                id: 'quartos',
+                title: 'Quartos',
+                photos: [
+                    { title: 'Quarto 1', file: 'tijuca-lite/quarto1.jpg' },
+                    { title: 'Quarto 2', file: 'tijuca-lite/quarto2.jpg' }
+                ]
+            },
+            {
+                id: 'banheiros',
+                title: 'Banheiro',
+                photos: [
+                    { title: 'Banheiro', file: 'tijuca-lite/banheiro.jpg' }
+                ]
+            },
+            {
+                id: 'vagas',
+                title: 'Casa, acessos e varanda',
+                photos: [
+                    { title: 'Cozinha', file: 'tijuca-lite/cozinha.jpg' },
+                    { title: 'Corredor 1', file: 'tijuca-lite/corredor1.jpg' },
+                    { title: 'Corredor 2', file: 'tijuca-lite/corredor2.jpg' },
+                    { title: 'Terraço', file: 'tijuca-lite/terraco.jpg' },
+                    { title: 'Varanda', file: 'tijuca-lite/varanda.jpg' }
+                ]
+            }
+        ]
+    },
     cobertura: {
         title: 'Cobertura Zona Sul',
         subtitle: 'Rio de Janeiro - RJ',
@@ -209,7 +259,7 @@ function renderMetaIcons(property) {
 function openFullscreen(photo, propertyTitle) {
     const url = new URL('viewer-fullscreen.html', window.location.href);
     url.searchParams.set('image', photo.file);
-    url.searchParams.set('title', `${propertyTitle} - ${photo.title}`);
+    url.searchParams.set('title', `${propertyTitle} - ${getDisplayPhotoTitle(photo.title)}`);
     window.open(url.toString(), '_blank', 'noopener,noreferrer');
 }
 
@@ -219,9 +269,7 @@ let drawerCurrentIndex = 0;
 let drawerViewer = null;
 
 function getAbsolutePhotoUrl(photo) {
-    return photo.file.startsWith('http')
-        ? photo.file
-        : 'https://corsatube360.com.br/' + (photo.file.startsWith('/') ? photo.file.slice(1) : photo.file);
+    return new URL(photo.file, window.location.href).href;
 }
 
 function getPlanKey(photo) {
@@ -230,6 +278,16 @@ function getPlanKey(photo) {
         .pop()
         .replace(/-4k\.jpg$/i, '')
         .replace(/\.(jpg|png|webp)$/i, '');
+}
+
+function getDisplayPhotoTitle(title) {
+    // Remove only the standalone token "360" from UI captions.
+    return title
+        .replace(/\b360\b/g, '')
+        .replace(/\s{2,}/g, ' ')
+        .replace(/\s+-\s+/g, ' - ')
+        .replace(/-\s*$/, '')
+        .trim();
 }
 
 function getPhotoPlanPosition(photo, index) {
@@ -252,18 +310,18 @@ function getPhotoPlanPosition(photo, index) {
     };
 
     const positionsByPointNumberMobile = {
-        1: [17, 31.4], // Sala (microajuste: subir)
-        2: [24, 31.4], // Sala (microajuste: subir)
-        3: [31, 31.4], // Sala (microajuste: subir)
-        4: [22, 64], // Cozinha
-        5: [66, 31.4], // Quarto 1 (microajuste: subir)
-        6: [75, 31.4], // Quarto 2 (microajuste: subir)
-        7: [86, 31.4], // Quarto 3 (microajuste: subir)
-        8: [67, 83], // Banheiros
-        9: [84, 83], // Banheiros
-        10: [90, 83], // Banheiros
-        11: [50, 45], // Corredor
-        12: [50, 51], // Corredor
+        1: [32, 27.5], // Sala (mobile)
+        2: [37, 27.5], // Sala (mobile)
+        3: [42, 27.5], // Sala (mobile)
+        4: [35.8, 68.5], // Cozinha (mobile)
+        5: [59, 24.8], // Quarto 1 (mobile)
+        6: [64.3, 24.8], // Quarto 2 (mobile)
+        7: [69.6, 24.8], // Quarto 3 (mobile)
+        8: [59.5, 76.5], // Banheiros (mobile)
+        9: [65.2, 76.5], // Banheiros (mobile)
+        10: [70.9, 76.5], // Banheiros (mobile)
+        11: [50, 43], // Corredor
+        12: [50, 54], // Corredor
     };
 
     const positionsByPointNumber = isMobilePlan
@@ -321,7 +379,7 @@ function renderDrawerPlan(drawer) {
                 class="photo-plan-pin${activeClass}"
                 style="left: ${x}%; top: ${y}%"
                 data-photo-index="${index}"
-                aria-label="${photo.title}">
+                aria-label="${getDisplayPhotoTitle(photo.title)}">
                 <span>${index + 1}</span>
             </button>
         `;
@@ -330,21 +388,23 @@ function renderDrawerPlan(drawer) {
     plan.innerHTML = `
         <div class="photo-plan-title">Planta do imovel</div>
         <div class="photo-plan-canvas">
-            <svg class="photo-plan-drawing" viewBox="0 0 100 70" aria-hidden="true" focusable="false">
-                <rect x="3" y="3" width="94" height="64" rx="2" fill="#f7fafc" stroke="#d4dde7" stroke-width="1.4" />
-                <rect x="7" y="7" width="35" height="22" fill="#eaf4ff" stroke="#9cafc4" />
-                <rect x="7" y="35" width="30" height="25" fill="#fff3e6" stroke="#9cafc4" />
-                <rect x="45" y="7" width="13" height="53" fill="#f2f5f7" stroke="#9cafc4" />
-                <rect x="61" y="7" width="9" height="20" fill="#ecf8f1" stroke="#9cafc4" />
-                <rect x="71" y="7" width="9" height="20" fill="#ecf8f1" stroke="#9cafc4" />
-                <rect x="81" y="7" width="10" height="20" fill="#ecf8f1" stroke="#9cafc4" />
-                <rect x="61" y="56" width="12" height="8" fill="#f5edf9" stroke="#9cafc4" />
-                <rect x="76" y="56" width="15" height="8" fill="#f5edf9" stroke="#9cafc4" />
-                <text x="10" y="12" font-size="4" fill="#476078">Sala</text>
-                <text x="10" y="40" font-size="4" fill="#6f563b">Cozinha</text>
-                <text x="64" y="12" font-size="4" fill="#3f654f">Quartos</text>
-            </svg>
-            ${pins}
+            <div class="photo-plan-stage">
+                <svg class="photo-plan-drawing" viewBox="0 0 100 70" aria-hidden="true" focusable="false">
+                    <rect x="3" y="3" width="94" height="64" rx="2" fill="#f7fafc" stroke="#d4dde7" stroke-width="1.4" />
+                    <rect x="7" y="7" width="35" height="22" fill="#eaf4ff" stroke="#9cafc4" />
+                    <rect x="7" y="35" width="30" height="25" fill="#fff3e6" stroke="#9cafc4" />
+                    <rect x="45" y="7" width="13" height="53" fill="#f2f5f7" stroke="#9cafc4" />
+                    <rect x="61" y="7" width="9" height="20" fill="#ecf8f1" stroke="#9cafc4" />
+                    <rect x="71" y="7" width="9" height="20" fill="#ecf8f1" stroke="#9cafc4" />
+                    <rect x="81" y="7" width="10" height="20" fill="#ecf8f1" stroke="#9cafc4" />
+                    <rect x="61" y="56" width="12" height="8" fill="#f5edf9" stroke="#9cafc4" />
+                    <rect x="76" y="56" width="15" height="8" fill="#f5edf9" stroke="#9cafc4" />
+                    <text x="10" y="12" font-size="4" fill="#476078">Sala</text>
+                    <text x="10" y="40" font-size="4" fill="#6f563b">Cozinha</text>
+                    <text x="64" y="12" font-size="4" fill="#3f654f">Quartos</text>
+                </svg>
+                ${pins}
+            </div>
         </div>
     `;
 
@@ -416,7 +476,7 @@ function showDrawerPhoto(index) {
     const counter = drawer.querySelector('.photo-drawer-counter');
     const absoluteUrl = getAbsolutePhotoUrl(photo);
 
-    title.textContent = photo.title;
+    title.textContent = getDisplayPhotoTitle(photo.title);
     eyebrow.textContent = drawerPropertyTitle;
     counter.textContent = `${drawerCurrentIndex + 1} / ${drawerPhotos.length}`;
     renderDrawerPlan(drawer);
@@ -506,7 +566,7 @@ const lazyViewerObserver = new IntersectionObserver((entries) => {
                     try {
                         new Viewer({
                             container: viewerContainer,
-                            panorama: photo.file.startsWith('http') ? photo.file : 'https://corsatube360.com.br/' + (photo.file.startsWith('/') ? photo.file.slice(1) : photo.file),
+                            panorama: getAbsolutePhotoUrl(photo),
                             navbar: false,
                             mousemove: true,
                             mousewheel: false,
@@ -519,7 +579,7 @@ const lazyViewerObserver = new IntersectionObserver((entries) => {
                     } catch (error) {
                         console.error('Erro no preview 360', error);
                         viewerContainer.innerHTML = '';
-                        const absoluteUrl = photo.file.startsWith('http') ? photo.file : 'https://corsatube360.com.br/' + (photo.file.startsWith('/') ? photo.file.slice(1) : photo.file);
+                        const absoluteUrl = getAbsolutePhotoUrl(photo);
                         viewerContainer.style.background = `url(${absoluteUrl}) center/cover no-repeat`;
                     }
                 });
@@ -545,7 +605,7 @@ function renderPhotoCard(photo, propertyTitle, photoIndex) {
     viewerContainer.id = viewerId;
     
     // Converter para URL absoluta para melhor compatibilidade mobile
-    const absoluteUrl = photo.file.startsWith('http') ? photo.file : 'https://corsatube360.com.br/' + (photo.file.startsWith('/') ? photo.file.slice(1) : photo.file);
+    const absoluteUrl = getAbsolutePhotoUrl(photo);
     viewerContainer.style.background = `url(${absoluteUrl}) center/cover no-repeat`;
 
     preview.appendChild(viewerContainer);
@@ -579,7 +639,7 @@ function renderPhotoCard(photo, propertyTitle, photoIndex) {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'photo-open';
-    button.textContent = `Abrir galeria · ${photo.title}`;
+    button.textContent = `Abrir galeria · ${getDisplayPhotoTitle(photo.title)}`;
     button.addEventListener('click', () => openPhotoDrawer(photoIndex, propertyTitle));
     card.appendChild(button);
 
