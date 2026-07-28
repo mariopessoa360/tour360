@@ -74,6 +74,14 @@ const properties = {
                 ]
             },
             {
+                id: 'varanda-terraco',
+                title: 'Varanda e Terraço',
+                photos: [
+                    { title: 'Terraço', file: 'tijuca-lite/terraco.jpg' },
+                    { title: 'Varanda', file: 'tijuca-lite/varanda.jpg' }
+                ]
+            },
+            {
                 id: 'quartos',
                 title: 'Quartos',
                 photos: [
@@ -90,13 +98,11 @@ const properties = {
             },
             {
                 id: 'vagas',
-                title: 'Casa, acessos e varanda',
+                title: 'Casa e acessos',
                 photos: [
                     { title: 'Cozinha', file: 'tijuca-lite/cozinha.jpg' },
                     { title: 'Corredor 1', file: 'tijuca-lite/corredor1.jpg' },
-                    { title: 'Corredor 2', file: 'tijuca-lite/corredor2.jpg' },
-                    { title: 'Terraço', file: 'tijuca-lite/terraco.jpg' },
-                    { title: 'Varanda', file: 'tijuca-lite/varanda.jpg' }
+                    { title: 'Corredor 2', file: 'tijuca-lite/corredor2.jpg' }
                 ]
             }
         ]
