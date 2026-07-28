@@ -64,21 +64,10 @@ const properties = {
         },
         sections: [
             {
-                id: 'overview',
-                title: 'Área Externa',
+                id: 'cozinha',
+                title: 'Cozinha',
                 photos: [
-                    { title: 'Área Externa 1', file: 'tijuca-lite/area-externa1.jpg' },
-                    { title: 'Área Externa 2', file: 'tijuca-lite/area-externa2.jpg' },
-                    { title: 'Área Externa 3', file: 'tijuca-lite/area-externa3.jpg' },
-                    { title: 'Área Externa 4', file: 'tijuca-lite/area-externa0.jpg' }
-                ]
-            },
-            {
-                id: 'varanda-terraco',
-                title: 'Varanda e Terraço',
-                photos: [
-                    { title: 'Terraço', file: 'tijuca-lite/terraco.jpg' },
-                    { title: 'Varanda', file: 'tijuca-lite/varanda.jpg' }
+                    { title: 'Cozinha', file: 'tijuca-lite/cozinha.jpg' }
                 ]
             },
             {
@@ -97,12 +86,29 @@ const properties = {
                 ]
             },
             {
-                id: 'vagas',
-                title: 'Casa e acessos',
+                id: 'circulacao',
+                title: 'Circulação',
                 photos: [
-                    { title: 'Cozinha', file: 'tijuca-lite/cozinha.jpg' },
                     { title: 'Corredor 1', file: 'tijuca-lite/corredor1.jpg' },
                     { title: 'Corredor 2', file: 'tijuca-lite/corredor2.jpg' }
+                ]
+            },
+            {
+                id: 'varanda-terraco',
+                title: 'Varanda e Terraço',
+                photos: [
+                    { title: 'Terraço', file: 'tijuca-lite/terraco.jpg' },
+                    { title: 'Varanda', file: 'tijuca-lite/varanda.jpg' }
+                ]
+            },
+            {
+                id: 'overview',
+                title: 'Área Externa',
+                photos: [
+                    { title: 'Área Externa 1', file: 'tijuca-lite/area-externa1.jpg' },
+                    { title: 'Área Externa 2', file: 'tijuca-lite/area-externa2.jpg' },
+                    { title: 'Área Externa 3', file: 'tijuca-lite/area-externa3.jpg' },
+                    { title: 'Área Externa 4', file: 'tijuca-lite/area-externa0.jpg' }
                 ]
             }
         ]
