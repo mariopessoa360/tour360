@@ -52,9 +52,9 @@ const properties = {
         ]
     },
     tijuca: {
-        title: 'Casa na Tijuca',
+        title: 'Aluguel - Casa na Tijuca',
         subtitle: 'Tijuca - Rio de Janeiro - RJ',
-        price: 'Casa 2 quartos - 100m²',
+        price: 'R$ 2.000,00',
         tourUrl: 'property-photos.html?property=tijuca',
         meta: {
             area: '100m² Área',
