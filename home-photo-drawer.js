@@ -318,6 +318,15 @@ function openPropertyDrawer(propertyId, startIndex = 0) {
     showDrawerPhoto(startIndex);
 }
 
+function openPropertyDrawerFromCard(propertyId, card) {
+    const property = propertyGalleries[propertyId];
+    if (!property) {
+        return;
+    }
+
+    openPropertyDrawer(propertyId, getStartIndexFromCard(card, property));
+}
+
 function closePhotoDrawer() {
     const drawer = document.getElementById('photo-drawer');
     if (!drawer) {
@@ -349,7 +358,7 @@ function bindHomeDrawer() {
 
             event.preventDefault();
             event.stopPropagation();
-            openPropertyDrawer(card.dataset.propertyId, getStartIndexFromCard(card, property));
+            openPropertyDrawerFromCard(card.dataset.propertyId, card);
         });
     });
 
@@ -364,10 +373,12 @@ function bindHomeDrawer() {
             event.preventDefault();
             event.stopPropagation();
             const card = button.closest('.property-card[data-property-id]');
-            openPropertyDrawer(propertyId, getStartIndexFromCard(card, property));
+            openPropertyDrawerFromCard(propertyId, card);
         });
     });
 }
+
+window.openPropertyPhotoDrawer = openPropertyDrawerFromCard;
 
 document.addEventListener('keydown', (event) => {
     const drawer = document.getElementById('photo-drawer');

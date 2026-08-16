@@ -394,6 +394,12 @@
 
             propertyCards.forEach(card => {
                 const openDetails = () => {
+                    const propertyId = card.dataset.propertyId;
+                    if (propertyId && typeof window.openPropertyPhotoDrawer === 'function') {
+                        window.openPropertyPhotoDrawer(propertyId, card);
+                        return;
+                    }
+
                     const detailUrl = card.dataset.detailUrl;
                     if (detailUrl) {
                         window.location.href = detailUrl;
@@ -422,7 +428,7 @@
             initViewers();
         }
     </script>
-    <script type="module" src="home-photo-drawer.js?v=20260816-2"></script>
+    <script type="module" src="home-photo-drawer.js?v=20260816-3"></script>
     <script src="script.js"></script>
 </body>
 </html>
