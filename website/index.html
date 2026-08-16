@@ -14,6 +14,7 @@
       gtag('config', 'G-4NNNGWEX2Y');
     </script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="property-photos.css?v=20260816-2">
     <!-- Photo Sphere Viewer (local) -->
     <link rel="stylesheet" href="vendor/photo-sphere-viewer/index.min.css"/>
 </head>
@@ -53,7 +54,7 @@
                 <h2>Imóveis Disponíveis</h2>
                 <p class="section-subtitle">Escolha um imóvel para abrir o tour ou ver a galeria 360 dos ambientes.</p>
                 <div class="properties-grid">
-                    <article class="property-card" data-detail-url="property-photos.html?property=flamengo" role="link" tabindex="0" aria-label="Abrir detalhes do Apartamento Flamengo Vista Baía">
+                    <article class="property-card" data-property-id="flamengo" data-detail-url="property-photos.html?property=flamengo" role="link" tabindex="0" aria-label="Abrir detalhes do Apartamento Flamengo Vista Baía">
                         <div class="property-image">
                             <div id="viewer-card-1" class="card-viewer-360"></div>
                             <button class="viewer-arrow viewer-arrow-left" type="button" data-viewer="viewer-card-1" data-direction="-1" aria-label="Foto 360 anterior">&#8249;</button>
@@ -95,7 +96,7 @@
                             </div>
                             <div class="property-actions">
                                 <a href="https://corsatube360.com.br/tour360/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Tour 360</a>
-                                <a href="property-photos.html?property=flamengo" class="btn btn-secondary">Fotos 360</a>
+                                <a href="property-photos.html?property=flamengo" class="btn btn-secondary" data-open-property-drawer="flamengo">Fotos 360</a>
                             </div>
                             <form class="contact-form card-contact-form">
                                 <input type="text" name="name" placeholder="Seu nome" required>
@@ -110,7 +111,7 @@
                         </div>
                     </article>
 
-                    <article class="property-card" data-detail-url="property-photos.html?property=tijuca" role="link" tabindex="0" aria-label="Abrir detalhes do Aluguel - Casa na Tijuca">
+                    <article class="property-card" data-property-id="tijuca" data-detail-url="property-photos.html?property=tijuca" role="link" tabindex="0" aria-label="Abrir detalhes do Aluguel - Casa na Tijuca">
                         <div class="property-image">
                             <div id="viewer-card-2" class="card-viewer-360"></div>
                             <button class="viewer-arrow viewer-arrow-left" type="button" data-viewer="viewer-card-2" data-direction="-1" aria-label="Foto 360 anterior">&#8249;</button>
@@ -149,7 +150,7 @@
                             </div>
                             <div class="property-actions">
                                 <a href="property-photos.html?property=tijuca" class="btn btn-primary">Tour 360</a>
-                                <a href="property-photos.html?property=tijuca" class="btn btn-secondary">Fotos 360</a>
+                                <a href="property-photos.html?property=tijuca" class="btn btn-secondary" data-open-property-drawer="tijuca">Fotos 360</a>
                             </div>
                             <form class="contact-form card-contact-form">
                                 <input type="text" name="name" placeholder="Seu nome" required>
@@ -297,6 +298,7 @@
 
             const viewerState = {};
             const autoRotateIntervals = {};
+            window.homeViewerState = viewerState;
 
             cardViewers.forEach(config => {
                 const container = document.getElementById(config.id);
@@ -420,6 +422,7 @@
             initViewers();
         }
     </script>
+    <script type="module" src="home-photo-drawer.js?v=20260816-2"></script>
     <script src="script.js"></script>
 </body>
 </html>
